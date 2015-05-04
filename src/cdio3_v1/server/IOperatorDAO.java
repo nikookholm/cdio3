@@ -9,7 +9,8 @@ public interface IOperatorDAO {
 	
 	public OperatorDTO createOperator(String oprName, String ini, String cpr) throws DALException; 
 	public OperatorDTO getOperator(int id, String password) throws DALException;
-	public ArrayList<OperatorDTO>getOperatorList();
+	public ArrayList<OperatorDTO>getOperatorList() throws DALException;
+	public int getSize () throws DALException;
 	public void updateOperator(OperatorDTO operator, String nwPsswrd) throws DALException;
 	public boolean deleteOperator(int oprID) throws DALException;
 	

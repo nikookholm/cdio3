@@ -14,7 +14,7 @@ import java.util.List;
 
 
 
-public class OperatorDAO_db //extends RemoteServiceServlet implements Main-method 
+public class OperatorDAO_db //extends RemoteServiceServlet implements Main 
 {
 	private static final String URL = "jdbc:mysql://localhost/cdio3";
 	private static final String USERNAME = "root";
@@ -26,7 +26,7 @@ public class OperatorDAO_db //extends RemoteServiceServlet implements Main-metho
 	private PreparedStatement updateOperatorStmt = null;
 	private PreparedStatement getOperatorListStmt = null;
 	private PreparedStatement deleteOperatorStmt = null;
-	private PreparedStatement
+	private PreparedStatement getSizeStmt = null;
 
 	public OperatorDAO_db() throws Exception
 	{
@@ -143,4 +143,15 @@ public class OperatorDAO_db //extends RemoteServiceServlet implements Main-metho
 		} 
 	}
 	
+	public int getSize() throws Exception
+	{
+		try {
+			ResultSet rs = null;
+			rs = getSizeStmt.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+		} catch (SQLException e) {
+			throw new DALException(" \"getSize\" fejlede");
+		} 
+	}
 }

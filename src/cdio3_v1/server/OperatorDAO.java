@@ -43,8 +43,8 @@ public class OperatorDAO implements IOperatorDAO {
 				cpr = cprFirstPart + "-" + cprSecdondPart;
 			}
 			
-			//String password = generateNewPassword();
-			//operators.add(new OperatorDTO(id, oprName, ini, cpr, password));
+			String password = generateNewPassword();
+			operators.add(new OperatorDTO(id, oprName, ini, cpr, password));
 
 			OperatorDTO result = null;
 			for (OperatorDTO operator : operators)
@@ -163,5 +163,82 @@ public class OperatorDAO implements IOperatorDAO {
 
 	}
 
-	
+	public String generateNewPassword()
+	{
+		String password;
+		//Opretter et array og giver det værdierne som ligger imellem A og Z i ASCII rækken
+		ArrayList<String> alpha = new ArrayList<String>(26);
+		for (char c='A'; c<='Z' ; c++)
+		{
+			alpha.add(String.valueOf(c));
+		}
+
+		//Tilsvarende for a-z
+		ArrayList<String> beta = new ArrayList<String>(26);
+		for (char c='a'; c<='z' ; c++)
+		{
+			beta.add(String.valueOf(c));
+		}
+
+		//Og tal
+		ArrayList<String> num = new ArrayList<String>();
+		for (char c='0'; c<='9' ; c++)
+		{
+			num.add(String.valueOf(c));
+		}
+
+		//Laver en ny arrayList, og der udplukkes et tilfældigt antal af tilfældige bogstaver
+		Random rAlpha = new Random();
+		int noOfAlphas = 2 + rAlpha.nextInt(5); //Det antal som skal udplukkes
+		ArrayList<String> alphaSeq = new ArrayList<String>(); //ArrayList til at gemme dem i
+		for(int i=0 ; i<noOfAlphas ; i++)
+		{
+			Random r = new Random();
+			alphaSeq.add(alpha.get(r.nextInt(alpha.size()))); //Og her vælges hvilke det skal være
+		}
+		//En ny arrayList hvor det endelige resultat bliver gemt
+		ArrayList<String> psswrd = new ArrayList<String>();
+		psswrd.addAll(alphaSeq);
+
+		//Små bogstaver udvælges
+		Random rBeta = new Random();
+		int noOfBetas = 2 + rBeta.nextInt(5);
+		ArrayList<String> betaSeq = new ArrayList<String>();
+		for(int i=0 ; i<noOfBetas ; i++)
+		{
+			Random r = new Random();
+			betaSeq.add(beta.get(r.nextInt(beta.size())));
+		}
+		//De små bogstaver tilføjes til passwordet
+		psswrd.addAll(betaSeq);
+
+		//Tal udvælges
+		Random rNum = new Random();
+		int noOfNums = 2 + rNum.nextInt(5);
+		ArrayList<String> numSeq = new ArrayList<String>();
+		for(int i=0 ; i<noOfNums ; i++)
+		{
+			Random r = new Random();
+			numSeq.add(num.get(r.nextInt(num.size())));
+		}
+		//Tal tilføjes passwordet
+		psswrd.addAll(numSeq);
+		Collections.shuffle(psswrd); //En metode som roder alle værdierne rundt
+
+		//ArrayListen bliver lavet til en String
+		StringBuilder sb = new StringBuilder();
+		for(String s : psswrd)
+		{
+			sb.append(s);
+		}
+
+		password = sb.toString();
+		return password;
+	}
+
+	@Override
+	public int getSize() throws DALException {
+			return operators.size();
+		}		
 }
+	
