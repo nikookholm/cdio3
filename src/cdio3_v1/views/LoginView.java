@@ -1,5 +1,6 @@
 package cdio3_v1.views;
 
+import cdio3_v1.client.ClientSideImpl;
 import cdio3_v1.client.Main;
 import cdio3_v1.shared.FieldVerifier;
 
@@ -21,12 +22,13 @@ public class LoginView extends Composite {
 	TextBox userBox;
 	TextBox passwordBox;
 	Button okBtn;
-	
+	ClientSideImpl clientImpl;
 	// Flag der skal afgøre om ok knappen skal gøres tilgændlig
 	boolean pwBox = false; 
 	boolean uBox = false;
 	
-	public LoginView(){
+	public LoginView(ClientSideImpl clientImpl){
+		this.clientImpl = clientImpl;
 		this.vPanel = new VerticalPanel();
 		initWidget(vPanel);
 		
