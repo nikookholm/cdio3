@@ -42,6 +42,7 @@ public class OperatorDAO implements IOperatorDAO {
 			{
 				cpr = cprFirstPart + "-" + cprSecdondPart;
 			}
+			
 			//String password = generateNewPassword();
 			//operators.add(new OperatorDTO(id, oprName, ini, cpr, password));
 
