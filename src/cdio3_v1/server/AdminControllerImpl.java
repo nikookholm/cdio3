@@ -1,6 +1,6 @@
 package cdio3_v1.server;
 
-import cdio3_v1.client.IAdminController;
+import cdio3_v1.client.AdminController;
 import cdio3_v1.shared.*;
 
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 @SuppressWarnings("serial")
-public class IAdminControllerImpl extends RemoteServiceServlet implements IAdminController{
+public class AdminControllerImpl extends RemoteServiceServlet implements AdminController{
 	
 	IOperatorDAO iOpr;
 	OperatorDTO opr;
