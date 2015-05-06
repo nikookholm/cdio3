@@ -24,4 +24,8 @@ public class ViewAdapter extends Composite {
 		LoginView login = new LoginView(clientImpl);
 		adapterPanel.add(login);
 	}
+	
+	public void clear(){
+		adapterPanel.clear();
+	}
 }

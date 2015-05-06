@@ -21,7 +21,7 @@ public class MenuView extends Composite {
 		// call back the controller
 		test1.addClickHandler(new ClickHandler(){
 			public void onClick(ClickEvent event){				
-			
+			mc.clear();
 			}
 		});
 
