@@ -9,7 +9,6 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import cdio3_v1.client.ClientSideImpl;
-import cdio3_v1.views.MenuView;
 import cdio3_v1.views.OperatorMenu;
 import cdio3_v1.views.ViewAdapter;
 
@@ -43,6 +42,8 @@ public class MainController {
 		RootPanel.get("nav").clear();
 		OperatorMenu om = new OperatorMenu(this);
 		RootPanel.get("nav").add(om);
+		RootPanel.get("section").clear();
+		
 	}
 
 }
