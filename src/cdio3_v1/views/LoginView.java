@@ -2,6 +2,7 @@ package cdio3_v1.views;
 
 import cdio3_v1.client.ClientSideImpl;
 import cdio3_v1.client.Main;
+import cdio3_v1.client.controller.MainController;
 import cdio3_v1.shared.FieldVerifier;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -11,6 +12,7 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -27,6 +29,9 @@ public class LoginView extends Composite {
 	boolean pwBox = false; 
 	boolean uBox = false;
 	
+	//midlertidig variabel
+	MainController mc = new MainController();
+	
 	public LoginView(ClientSideImpl clientImpl){
 		this.clientImpl = clientImpl;
 		this.vPanel = new VerticalPanel();
@@ -36,7 +41,7 @@ public class LoginView extends Composite {
 		passwordLabel = new Label("Password");
 		
 		userBox = new TextBox();
-		passwordBox = new TextBox();
+		passwordBox = new PasswordTextBox();
 		
 		okBtn = new Button("Ok");
 		okBtn.setEnabled(false);
@@ -92,6 +97,10 @@ public class LoginView extends Composite {
 				//Herefter skal der komme en menu, altefter om det er en admin eller en operatør der er logget ind
 				//Admin skal kunne bruge vægten samt have adgang til CRUD funktionerne.
 				String loginData = userBox.getText() + "," + passwordBox.getText();
+				
+				mc.loadOperatorMenu();
+				
+				
 				
 				
 			}

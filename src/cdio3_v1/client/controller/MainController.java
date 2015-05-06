@@ -26,8 +26,8 @@ public class MainController {
 
 
 	
-		MenuView mv = new MenuView(this);
-		RootPanel.get("nav").add(mv);
+//		MenuView mv = new MenuView(this);
+//		RootPanel.get("nav").add(mv);
 
 
 		va = new ViewAdapter(clientImpl);
@@ -39,7 +39,7 @@ public class MainController {
 
 	}
 	
-	public void clear(){
+	public void loadOperatorMenu(){
 		RootPanel.get("nav").clear();
 		OperatorMenu om = new OperatorMenu(this);
 		RootPanel.get("nav").add(om);

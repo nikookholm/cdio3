@@ -20,6 +20,11 @@ h1 {
   width: 400px;
 }
 
+.gwt-PasswordTextBox {
+	width: 140px;
+	height: 20px;
+}
+
 .dialogVPanel {
   margin: 5px;
 }
@@ -32,3 +37,4 @@ h1 {
 #closeButton {
   margin: 15px 6px 6px;
 }
+

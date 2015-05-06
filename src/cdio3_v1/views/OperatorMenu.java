@@ -18,21 +18,45 @@ public class OperatorMenu extends Composite{
 	VerticalPanel vPanel;
 
 
+	/*
+	 * use weight, log out, change password, 
+	 */
 	
 	public OperatorMenu(final MainController mc){
 		vPanel = new VerticalPanel();
 		initWidget(vPanel);
-		Anchor anc = new Anchor("123");
-		vPanel.add(anc);
-		anc.addClickHandler(new ClickHandler() {
+		
+		Anchor useWeight = new Anchor("Benyt Vægten");
+		vPanel.add(useWeight);
+		useWeight.addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				mc.clear();
+				mc.loadOperatorMenu();
 				
 			}
 		});
 		
+		Anchor changePassword = new Anchor("Ændr Password");
+		vPanel.add(changePassword);
+		changePassword.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				mc.loadOperatorMenu();
+				
+			}
+		});
+		Anchor logOut = new Anchor("Log ud");
+		vPanel.add(logOut);
+		logOut.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				mc.loadOperatorMenu();
+				
+			}
+		});
 
 
 		}
