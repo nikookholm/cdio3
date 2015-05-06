@@ -7,12 +7,14 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import cdio3_v1.client.ClientSideImpl;
+import cdio3_v1.views.MenuAdapter;
 import cdio3_v1.views.ViewAdapter;
 
 
 public class MainController extends Composite {
 	ClientSideImpl clientImpl;
 	ViewAdapter va;
+	MenuAdapter m;
 
 	public MainController() {
 
@@ -20,8 +22,8 @@ public class MainController extends Composite {
 		clientImpl = new ClientSideImpl(GWT.getModuleBaseURL() + "greet");
 
 
-		//	MenuView m = new MenuView(this);
-		//	RootPanel.get("nav").add(m);
+		 m = new MenuAdapter(this);
+		RootPanel.get().add(m);
 
 
 		va = new ViewAdapter(clientImpl);
@@ -31,6 +33,7 @@ public class MainController extends Composite {
 	public void run() {
 		// show welcome panel
 		va.loadLogin();	
+		m.loadMenuView();
 	}
 
 }
