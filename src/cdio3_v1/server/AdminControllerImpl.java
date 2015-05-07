@@ -34,7 +34,7 @@ public class AdminControllerImpl extends RemoteServiceServlet implements AdminCo
 		cond = db.deleteOperator(id);
 		
 		if(cond == false){
-			//ErrorView();
+			throw new DALException("Det lykkedes ikke at slette operatøren.");
 		}
 	}
 
