@@ -70,25 +70,7 @@ public class OperatorDAO implements IOperatorDAO {
 	}
 	
 	@Override
-	public boolean deleteOperator(int oprId) throws DALException {
-		OperatorDTO deleteOperator = null;
-		
-			if ((opr.getID() == oprId))
-			{
-				deleteOperator = O;
-			}
-			
-		if (deleteOperator == null)
-		{
-			throw new DALException("Ugyldigt operatør ID");
-		}
-		else
-		{
-			operators.remove(deleteOperator);
-		}
-
-		
-		
+	public boolean deleteOperator(int oprId) throws DALException {	
 		Connector.doUpdate(
 				"DELETE FROM operator WHERE id =  '" + oprId);
 		return true;
@@ -127,7 +109,7 @@ public class OperatorDAO implements IOperatorDAO {
 		return list;
 	}
 	
-	//Meto
+	//Metoden, der genererer et password ud fra DTU's krav.
 	private String generateNewPassword()
 	{
 		String password;
