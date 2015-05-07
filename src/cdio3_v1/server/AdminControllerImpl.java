@@ -11,7 +11,9 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 @SuppressWarnings("serial")
 public class AdminControllerImpl extends RemoteServiceServlet implements AdminController{
-
+	
+	WeightFunctions weight;
+	
 	private void create(OperatorDTO opr) throws Exception{	
 		
 		OperatorDAO db;
@@ -63,11 +65,23 @@ public class AdminControllerImpl extends RemoteServiceServlet implements AdminCo
 		return ls;
 	}
 
-	public WeightFunctions getWeight(){
+	public void tara() throws Exception {
+		weight.tara();
+	}
+
+	public String RM20(String msg) {
 		
-		WeightFunctions weight;
+		return weight.sendRM20(msg);
+	}
+
+	public void display(String displayMsg) {
 		
-		return weight;
+		weight.sendMessage(displayMsg);
+	}
+
+	public double getWeight() {
+		
+		return weight.getWeight();
 	}
 
 }
