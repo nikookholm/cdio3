@@ -1,134 +1,83 @@
 package cdio3_v1.server;
-import cdio3_v1.server.IOperatorDAO;
-import cdio3_v1.server.IOperatorDAO.DALException;
-import cdio3_v1.shared.*;
 
-import java.util.*;
-import java.io.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
+import cdio3_v1.shared.DALException;
+import cdio3_v1.shared.FieldVerifier;
+import cdio3_v1.shared.OperatorDTO;
+import cdio3_v1.server.Connector;
+import cdio3_v1.server.IOperatorDAO;
+
+import java.sql.ResultSet;
+
 
 public class OperatorDAO implements IOperatorDAO {
+	
+	public void createOperator(OperatorDTO opr) throws DALException {
+		int newId = 0;
+		ResultSet rs = Connector.doQuery("SELECT * FROM operator ORDER BY opr_id LIMIT 1");
+		try {
+			if(rs.first() == false)
+			{
+				newId = rs.getInt("opr_id")+1;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			throw new DALException("SQL-fejl: "+e.getMessage());
+		}
+		
+		String newPassword = generateNewPassword();
+		
+		//sendt fra view
+		if((FieldVerifier.isNewIdValid(newId)) && 
+		   (FieldVerifier.isNameValid(opr.getName())) && 
+		   (FieldVerifier.isIniValid(opr.getIni())) && 
+		   (FieldVerifier.isCprValid(opr.getCpr())) && 
+		   (FieldVerifier.isPasswordValid(newPassword)))
+		{
+		Connector.doUpdate(
+				"INSERT INTO operator(opr_id, opr_name, ini, cpr, password) VALUES " + 
+				"(" + newId + ", '" + opr.getName() + "', '" + opr.getIni() + "', '" + 
+				opr.getCpr() + "', '" + newPassword + "')"
+			);
+		}
+		
+	}
 
-	private ArrayList<OperatorDTO> operators = new ArrayList<OperatorDTO>();
+	@Override
+	public void updateOperator(OperatorDTO opr) throws DALException {
+		
+		//Sendt fra view
+		if((FieldVerifier.isNewIdValid(opr.getID())) && 
+		   (FieldVerifier.isNameValid(opr.getName())) && 
+		   (FieldVerifier.isIniValid(opr.getIni())) && 
+		   (FieldVerifier.isCprValid(opr.getCpr())) && 
+		   (FieldVerifier.isPasswordValid(opr.getPassword())))
+		{
+		Connector.doUpdate(
+				"UPDATE operator SET  opr_name = '" + opr.getName() + "', ini =  '" + opr.getIni() + 
+				"', cpr = '" + opr.getCpr() + "', password = '" + opr.getPassword() + "' WHERE opr_id = " +
+				opr.getID());
+		
+		}
+	
+	}
 	
 	@Override
-	public OperatorDTO createOperator(String oprName, String ini, String cpr) throws DALException {
-		int id = 0;
-		boolean idAvaliable;
-		for (int i = 99999999 ; i>1 ; i--){
-			idAvaliable = true;
-			for(OperatorDTO operator : operators){
-				if(operator.getID() == i){
-					idAvaliable = false;
-				}
-			}
-			if (idAvaliable == true){
-				id = i;
-
-			}
-		}
-		if (id== 0) {
-			throw new DALException("Der findes ikke flere id'er");
-		}
-		if (!checkCprID(cpr)){
-			throw new DALException("Cpr nummeret skal indeholde 10 cifre, \"-\" er valgfrit");
-		}
-		else if(oprName.length() > 20){
-			throw new DALException("Det indtastede operatørnavn indeholder over 20 tegn");
-		}
-		else{
-			String cprFirstPart = cpr.substring(0,6);
-			String cprSecdondPart = cpr.substring(6);
-			if (cpr.charAt(6) != '-')
+	public boolean deleteOperator(int oprId) throws DALException {
+		OperatorDTO deleteOperator = null;
+		
+			if ((opr.getID() == oprId))
 			{
-				cpr = cprFirstPart + "-" + cprSecdondPart;
+				deleteOperator = O;
 			}
 			
-			String password = generateNewPassword();
-			operators.add(new OperatorDTO(id, oprName, ini, cpr, password));
-
-			OperatorDTO result = null;
-			for (OperatorDTO operator : operators)
-			{
-				if (operator.getID() == id)
-				{
-					result = operator;
-				}
-			}
-			return result;
-		}
-	}
-
-	@Override
-	public OperatorDTO getOperator(int id, String password) throws DALException {
-		OperatorDTO getOperator = null;
-		for (int i = 0; i < operators.size(); i++)
-		{
-			if ((operators.get(i).getID() == id) && (operators.get(i).getPassword().equals(password)))
-			{
-				getOperator = operators.get(i);
-			}
-		}
-
-		if (getOperator == null)
-		{
-			throw new DALException("Operatøren findes ikke!");
-		} else
-			return getOperator;
-	}
-
-	@Override
-	public ArrayList<OperatorDTO> getOperatorList() {
-		return operators;
-	}
-
-	@Override
-	public void updateOperator(OperatorDTO operator, String newPassword) throws DALException {
-		boolean passwordOK = false;
-
-		if(newPassword.length()>=6)
-		{
-			int smalls = 0;
-			int bigs = 0;
-			int nos = 0;
-			for(int i=0 ; i<newPassword.length() ; i++)
-			{
-				if(newPassword.charAt(i)>='A' && newPassword.charAt(i)<='Z'){
-					bigs ++;
-				}
-				if(newPassword.charAt(i)>='a' && newPassword.charAt(i)<='z'){
-					smalls ++;
-				}
-				if(newPassword.charAt(i)>='0' && newPassword.charAt(i)<='9'){
-					nos ++;
-				}
-			}
-
-			if((bigs>=1) && (smalls>=1) && (nos>=1))
-			{
-				passwordOK = true;
-
-				OperatorDTO newOperator = new OperatorDTO(operator.getID(), operator.getName(), operator.getIni(), operator.getCpr(), newPassword);
-				operators.remove(operators.indexOf(operator));
-				operators.add(newOperator);
-			}
-		}
-
-		if(!passwordOK){
-			throw new DALException("Dit kodeord lever ikke op til de givne standarder.");
-		}	
-	}
-
-	@Override
-	public boolean deleteOperator(int oprID) throws DALException {
-		OperatorDTO deleteOperator = null;
-		for (OperatorDTO operator : operators)
-		{
-			if ((operator.getID() == oprID))
-			{
-				deleteOperator = operator;
-			}
-		}
-
 		if (deleteOperator == null)
 		{
 			throw new DALException("Ugyldigt operatør ID");
@@ -138,32 +87,48 @@ public class OperatorDAO implements IOperatorDAO {
 			operators.remove(deleteOperator);
 		}
 
-		return (deleteOperator != null);
+		
+		
+		Connector.doUpdate(
+				"DELETE FROM operator WHERE id =  '" + oprId);
+		return true;
 	}
-
-	private boolean checkCprID(String cpr) 
-	{ 
-
-		cpr = cpr.replace("-", "");// klipet striben i cprNummer
+	
+	@Override
+	public OperatorDTO getOperator(int oprId) throws DALException {
+		ResultSet rs = Connector.doQuery("SELECT * FROM operator WHERE opr_id = " + oprId);
+	    try {
+	    	if (!rs.first()) throw new DALException("Operator " + oprId + " was not found");
+	    	return new OperatorDTO (rs.getInt("opr_id"), rs.getString("opr_name"), 
+	    							rs.getString("ini"), rs.getString("cpr"), rs.getString("password"));
+	    }
+	    catch (SQLException e) 
+	    {
+	    	throw new DALException(e); 
+	    }
+		
+	}
+	
+	@Override
+	public ArrayList<OperatorDTO> getOperatorList() throws DALException {
+		ArrayList<OperatorDTO> list = new ArrayList<OperatorDTO>();
+		ResultSet rs = Connector.doQuery("SELECT * FROM operator");
 		try
 		{
-			long Cpr = Long.parseLong(cpr);// sættes så længe Cpr er: lig cpr og lig med en række af 10 tal.
-
-			if(cpr.length()==10)
+			while (rs.next()) 
 			{
-				return true; 
+				list.add(new OperatorDTO(rs.getInt("opr_id"), rs.getString("opr_name"), 
+										 rs.getString("ini"), rs.getString("cpr"), rs.getString("password")));
 			}
-			return false;
-
 		}
-		catch(Exception e)
-		{
-			return false;
+		catch (SQLException e) { 
+			throw new DALException(e); 
 		}
-
+		return list;
 	}
-
-	public String generateNewPassword()
+	
+	//Meto
+	private String generateNewPassword()
 	{
 		String password;
 		//Opretter et array og giver det værdierne som ligger imellem A og Z i ASCII rækken
@@ -236,9 +201,5 @@ public class OperatorDAO implements IOperatorDAO {
 		return password;
 	}
 
-	@Override
-	public int getSize() throws DALException {
-			return operators.size();
-		}		
-}
 	
+}
