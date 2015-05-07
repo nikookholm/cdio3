@@ -21,7 +21,8 @@ public interface AdminControllerAsync {
 	void create(OperatorDTO oDTO, AsyncCallback<Void> callback) throws Exception;
 	void update(OperatorDTO oDTO, AsyncCallback<Void> callback) throws Exception;
 	void delete(int id, AsyncCallback<Void> callback) throws Exception;
-	void read(AsyncCallback<List<OperatorDTO>> callback)throws Exception ;
+	void read(AsyncCallback<List<OperatorDTO>> callback)throws Exception;
+	void login(String login, AsyncCallback<Boolean> callback) throws Exception;
 	
 	
 	
