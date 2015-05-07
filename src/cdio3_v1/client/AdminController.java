@@ -1,5 +1,10 @@
 package cdio3_v1.client;
 
+import java.util.List;
+
+import cdio3_v1.server.WeightFunctions;
+import cdio3_v1.shared.OperatorDTO;
+
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -8,5 +13,10 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  */
 @RemoteServiceRelativePath("greet")
 public interface AdminController extends RemoteService {
+		public void showCreate(List<OperatorDTO> oDTO);
+		public WeightFunctions getWeight();
+
+		
 	
+
 }
