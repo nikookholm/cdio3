@@ -14,8 +14,11 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("greet")
 public interface AdminController extends RemoteService {
 	
-		public void showCreate(List<OperatorDTO> oDTO) throws Exception;
-		
+
+		public void tara() throws Exception;
+		public String RM20(String msg);
+		public void display(String displayMsg);
+		public double getWeight();
 		
 
 		

@@ -13,8 +13,12 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * The async counterpart of <code>GreetingService</code>.
  */
 public interface AdminControllerAsync {
-	void showCreate(List<OperatorDTO> oDTO, AsyncCallback<Void> callback) throws Exception;
 	
-
-
+	void tara(AsyncCallback<Void> callback);
+	void RM20(String msg,AsyncCallback<String> callback);
+	void display(String displayMsg, AsyncCallback<Void> callback);
+	void getWeight(AsyncCallback<Double> callback);
+	
+	
+	
 }
