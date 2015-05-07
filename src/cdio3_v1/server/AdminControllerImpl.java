@@ -14,19 +14,19 @@ public class AdminControllerImpl extends RemoteServiceServlet implements AdminCo
 	
 	WeightFunctions weight;
 	
-	private void create(OperatorDTO opr) throws Exception{	
+	public void create(OperatorDTO opr) throws Exception{	
 		
 		OperatorDAO db;
 		db.createOperator(opr);
 	}
 
-	private void update(OperatorDTO opr) throws Exception{
+	public void update(OperatorDTO opr) throws Exception{
 		
 		OperatorDAO db;
 		db.createOperator(opr);
 	}
 
-	private void delete(int ID) throws Exception{
+	public void delete(int ID) throws Exception{
 		
 		boolean cond;
 		OperatorDTO opr;
@@ -40,7 +40,7 @@ public class AdminControllerImpl extends RemoteServiceServlet implements AdminCo
 		}
 	}
 
-	private boolean login(String idAndPswd) throws Exception{
+	public boolean login(String idAndPswd) throws Exception{
 		
 		boolean cond = false;
 		OperatorDAO db;
