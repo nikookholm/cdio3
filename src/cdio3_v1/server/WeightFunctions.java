@@ -19,6 +19,21 @@ public class WeightFunctions {
 		return (tcp.receive()=="T\r\n")? true : false;
 	}
 	
+	public Double getWeight()
+	{
+		String temp;
+		tcp.send("S\r\n");
+		temp = tcp.receive();
+		if (temp.split(" ")[0] == "S")
+		{
+			return Double.parseDouble(temp.split(" ")[1]);
+		}
+		else
+		{
+			return null;
+		}
+	}
+	
 	public boolean sendMessage(String message)
 	{
 		tcp.send(message + "\r\n");
