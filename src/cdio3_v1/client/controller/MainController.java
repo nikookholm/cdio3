@@ -46,6 +46,13 @@ public class MainController {
 		RootPanel.get("section").clear();
 		
 	}
+	
+	public void loadWeightView(){
+		RootPanel.get("section").clear();
+		va.loadWeightView();
+		RootPanel.get("section").add(va);
+		
+	}
 
 }
 

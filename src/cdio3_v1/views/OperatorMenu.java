@@ -32,7 +32,7 @@ public class OperatorMenu extends Composite{
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				mc.loadOperatorMenu();
+				mc.loadWeightView();
 				
 			}
 		});
@@ -53,7 +53,7 @@ public class OperatorMenu extends Composite{
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				mc.loadOperatorMenu();
+			
 				
 			}
 		});

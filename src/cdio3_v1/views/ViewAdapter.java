@@ -28,4 +28,10 @@ public class ViewAdapter extends Composite {
 	public void clear(){
 		adapterPanel.clear();
 	}
+	
+	public void loadWeightView(){
+		adapterPanel.clear();
+		WeightView weight= new WeightView();
+		adapterPanel.add(weight);
+	}
 }
