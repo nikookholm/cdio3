@@ -13,10 +13,19 @@ public class WeightFunctions {
 		tcp.connect();
 	}
 
-	public boolean tara()
+	public Double tara()
 	{
+		String temp;
 		tcp.send("T\r\n");
-		return (tcp.receive()=="T\r\n")? true : false;
+		temp = tcp.receive();
+		if (temp.split(" ")[0] == "T")
+		{
+			return Double.parseDouble(temp.split(" ")[1]);
+		}
+		else
+		{
+			return null;
+		}
 	}
 	
 	public Double getWeight()
