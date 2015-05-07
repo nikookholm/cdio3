@@ -14,10 +14,14 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  */
 public interface AdminControllerAsync {
 	
-	void tara(AsyncCallback<Void> callback);
-	void RM20(String msg,AsyncCallback<String> callback);
-	void display(String displayMsg, AsyncCallback<Void> callback);
-	void getWeight(AsyncCallback<Double> callback);
+	void tara(AsyncCallback<Void> callback) throws Exception; 
+	void RM20(String msg,AsyncCallback<String> callback) throws Exception;
+	void display(String displayMsg, AsyncCallback<Void> callback) throws Exception;
+	void getWeight(AsyncCallback<Double> callback) throws Exception;
+	void create(OperatorDTO oDTO, AsyncCallback<Void> callback) throws Exception;
+	void update(OperatorDTO oDTO, AsyncCallback<Void> callback) throws Exception;
+	void delete(int id, AsyncCallback<Void> callback) throws Exception;
+	void read(AsyncCallback<List<OperatorDTO>> callback)throws Exception ;
 	
 	
 	

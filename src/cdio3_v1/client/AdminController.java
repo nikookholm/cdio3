@@ -16,11 +16,13 @@ public interface AdminController extends RemoteService {
 	
 
 		public void tara() throws Exception;
-		public String RM20(String msg);
-		public void display(String displayMsg);
-		public double getWeight();
-		
-
+		public String RM20(String msg) throws Exception;
+		public void display(String displayMsg)throws Exception;
+		public double getWeight()throws Exception;
+		public void create(OperatorDTO oDTO)throws Exception;
+		public void update(OperatorDTO oDTO)throws Exception;
+		public void delete(int id)throws Exception;
+		public List<OperatorDTO> read()throws Exception;
 		
 	
 
