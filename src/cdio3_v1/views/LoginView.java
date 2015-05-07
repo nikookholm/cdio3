@@ -3,6 +3,7 @@ package cdio3_v1.views;
 import cdio3_v1.client.ClientSideImpl;
 import cdio3_v1.client.Main;
 import cdio3_v1.client.controller.MainController;
+import cdio3_v1.shared.DALException;
 import cdio3_v1.shared.FieldVerifier;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -61,11 +62,16 @@ public class LoginView extends Composite {
 			
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
-				if(FieldVerifier.isValidID(userBox.getText())){
-					uBox = true;
-				}
-				else{
-					uBox = false;
+				try {
+					if(FieldVerifier.isIdValid(userBox.getText())){
+						uBox = true;
+					}
+					else{
+						uBox = false;
+					}
+				} catch (DALException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 				okButtonEnabler();
 			}
@@ -75,11 +81,16 @@ public class LoginView extends Composite {
 			
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
-				if(FieldVerifier.isPasswordValid(passwordBox.getText())){
-					pwBox = true;
-				}
-				else{
-					pwBox = false;
+				try {
+					if(FieldVerifier.isPasswordValid(passwordBox.getText())){
+						pwBox = true;
+					}
+					else{
+						pwBox = false;
+					}
+				} catch (DALException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 				okButtonEnabler();
 				
