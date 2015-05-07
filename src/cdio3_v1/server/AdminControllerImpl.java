@@ -121,5 +121,12 @@ public class AdminControllerImpl extends RemoteServiceServlet implements AdminCo
 
 		return cond;
 	}
+	
+	private WeightFunctions getWeight(){
+		
+		WeightFunctions weight;
+		
+		return weight;
+	}
 
 }
