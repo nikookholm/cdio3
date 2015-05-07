@@ -9,6 +9,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
@@ -25,11 +26,12 @@ public class LoginView extends Composite {
 	TextBox passwordBox;
 	Button okBtn;
 	ClientSideImpl clientImpl;
-	// Flag der skal afgøre om ok knappen skal gøres tilgændlig
+	
+	// Flag der skal afgøre om ok knappen skal gøres tilgænglig
 	boolean pwBox = false; 
 	boolean uBox = false;
 	
-	//midlertidig variabel
+	//midlertidig variabel til at kontrollere om views hænger sammen.
 	MainController mc = new MainController();
 	
 	public LoginView(ClientSideImpl clientImpl){
@@ -52,12 +54,7 @@ public class LoginView extends Composite {
 		vPanel.add(passwordBox);
 		vPanel.add(okBtn);
 		
-		/*
-		 *  Der skal implementeres 
-		 *  	En clickhandler til ok knappen, skal sende ID og password ned af.
-		 *  	En KeyupHandler til textbox'ne
-		 *  	En fieldverifier, der gør at man kun kan klikke ok, hvis Operatør id er et tal, og hvis password min. har 6 char
-		 */
+		
 		
 		// Skal registrerer om der er indtastet et integer i feltet, og rejse et flag, ok knappen kan aktiveres
 		userBox.addKeyUpHandler(new KeyUpHandler() {
@@ -88,6 +85,22 @@ public class LoginView extends Composite {
 				
 			}
 		});
+		
+//		this.clientImpl.service.getOperatorList(new AsyncCallback<List<OperatorDTO>>() {
+//
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//
+//			@Override
+//			public void onSuccess(List<OperatorDTO> result) {
+//				
+//				
+//			}
+//		});
+		
 		//Skal sende login dataen videre så den kan behandles, og operatøren eller admin kan registreres
 		okBtn.addClickHandler(new ClickHandler() {
 			
@@ -97,6 +110,7 @@ public class LoginView extends Composite {
 				//Herefter skal der komme en menu, altefter om det er en admin eller en operatør der er logget ind
 				//Admin skal kunne bruge vægten samt have adgang til CRUD funktionerne.
 				String loginData = userBox.getText() + "," + passwordBox.getText();
+			
 				
 				mc.loadOperatorMenu();
 				

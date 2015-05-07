@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import cdio3_v1.client.ClientSideImpl;
+import cdio3_v1.views.AdminMenu;
 import cdio3_v1.views.OperatorMenu;
 import cdio3_v1.views.ViewAdapter;
 
@@ -40,7 +41,7 @@ public class MainController {
 	
 	public void loadOperatorMenu(){
 		RootPanel.get("nav").clear();
-		OperatorMenu om = new OperatorMenu(this);
+		AdminMenu om = new AdminMenu(this);
 		RootPanel.get("nav").add(om);
 		RootPanel.get("section").clear();
 		
