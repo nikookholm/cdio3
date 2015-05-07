@@ -33,17 +33,46 @@ public class FieldVerifier {
 	 * @param name the name to validate
 	 * @return true if valid, false if invalid
 	 */
-	public static boolean isValidID(String ID) {
-		if(ID.length() == 0){
+	public static boolean isValidID(String oprId) {
+		if(oprId.length() == 0){
 			return false;
 		}
-		for(char c : ID.toCharArray()){
+		for(char c : oprId.toCharArray()){
 			if(!Character.isDigit(c)){
 				return false;
 			}
 		}
 		return true;
 	}
+	
+	public static boolean newIdIsValid(int oprId)
+	{
+		return ((oprId > 0) && (oprId < 100000000));	
+	
+	}
+	
+	public static boolean checkCprID(String cpr) 
+	{ 
+
+		cpr = cpr.replace("-", "");// klipet striben i cprNummer
+		try
+		{
+			long Cpr = Long.parseLong(cpr);// sættes så længe Cpr er: lig cpr og lig med en række af 10 tal.
+
+			if(cpr.length()==10)
+			{
+				return true; 
+			}
+			return false;
+
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+
+	}
+	
 	public static boolean isPasswordValid(String pw){
 		if(pw.equals(null)){
 			return false;
@@ -53,4 +82,5 @@ public class FieldVerifier {
 		}
 		return pw.length() >= 6;
 	}
+	
 }

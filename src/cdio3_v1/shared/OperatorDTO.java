@@ -1,4 +1,5 @@
 package cdio3_v1.shared;
+
 public class OperatorDTO{
 	
 	private int oprId;                     
@@ -19,14 +20,23 @@ public class OperatorDTO{
 		this.password = password;
 	}
 
+	public OperatorDTO(OperatorDTO opr) //konstruktøren som sender alle variablerne med 
+	    {
+	    	super();
+			this.oprId = opr.getID();
+	    	this.oprName = opr.getName();
+	    	this.ini = opr.getIni();
+	    	this.cpr = opr.getCpr();
+	    	this.password = opr.getPassword();
+	    }
 	public int getID()
 	{
 		return oprId;
 	}
 
-	public void setID(int oprID)
+	public void setID(int oprId)
 	{
-		this.oprId = oprID;
+		this.oprId = oprId;
 	}
 	
 	public String getName()
