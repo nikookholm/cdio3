@@ -13,24 +13,22 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class AdminControllerImpl extends RemoteServiceServlet implements AdminController{
 	
 	WeightFunctions weight;
+	OperatorDAO db;
+	OperatorDTO opr;
 	
 	public void create(OperatorDTO opr) throws Exception{	
 		
-		OperatorDAO db;
 		db.createOperator(opr);
 	}
 
 	public void update(OperatorDTO opr) throws Exception{
 		
-		OperatorDAO db;
 		db.createOperator(opr);
 	}
 
 	public void delete(int ID) throws Exception{
 		
 		boolean cond;
-		OperatorDTO opr;
-		OperatorDAO db;
 		int id = opr.getID();
 		
 		cond = db.deleteOperator(id);
@@ -43,12 +41,11 @@ public class AdminControllerImpl extends RemoteServiceServlet implements AdminCo
 	public boolean login(String idAndPswd) throws Exception{
 		
 		boolean cond = false;
-		OperatorDAO db;
 		
 		int id = Integer.parseInt(idAndPswd.substring(0, idAndPswd.indexOf(","))); 
 		String pswd = idAndPswd.substring(idAndPswd.indexOf(",")+1);		
 		
-		OperatorDTO opr = db.getOperator(id);
+		opr = db.getOperator(id);
 		
 		if(pswd == opr.getPassword()){
 			cond = true;
@@ -59,7 +56,6 @@ public class AdminControllerImpl extends RemoteServiceServlet implements AdminCo
 
 	public List<OperatorDTO> read(){
 		
-		OperatorDAO db;
 		List<OperatorDTO> ls = db.getOperatorList();
 		
 		return ls;
