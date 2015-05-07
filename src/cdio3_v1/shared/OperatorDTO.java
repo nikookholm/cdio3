@@ -1,6 +1,8 @@
 package cdio3_v1.shared;
 
-public class OperatorDTO{
+import java.io.Serializable;
+
+public class OperatorDTO implements Serializable{
 	
 	private int oprId;                     
 	private String oprName;
@@ -10,6 +12,8 @@ public class OperatorDTO{
 
 	//alle informationer om operatør findes her.
 
+	public OperatorDTO(){}
+	
 	public OperatorDTO(int oprId, String oprName, String ini, String cpr, String password) 
 	{
 		super();
