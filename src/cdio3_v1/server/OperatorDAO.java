@@ -135,8 +135,7 @@ public class OperatorDAO implements IOperatorDAO {
 		}
 
 		//Laver en ny arrayList, og der udplukkes et tilfældigt antal af tilfældige bogstaver
-		Random rAlpha = new Random();
-		int noOfAlphas = 2 + rAlpha.nextInt(5); //Det antal som skal udplukkes
+		int noOfAlphas = 3; //Det antal som skal udplukkes
 		ArrayList<String> alphaSeq = new ArrayList<String>(); //ArrayList til at gemme dem i
 		for(int i=0 ; i<noOfAlphas ; i++)
 		{
@@ -148,8 +147,7 @@ public class OperatorDAO implements IOperatorDAO {
 		psswrd.addAll(alphaSeq);
 
 		//Små bogstaver udvælges
-		Random rBeta = new Random();
-		int noOfBetas = 2 + rBeta.nextInt(5);
+		int noOfBetas = 3;
 		ArrayList<String> betaSeq = new ArrayList<String>();
 		for(int i=0 ; i<noOfBetas ; i++)
 		{
@@ -160,8 +158,7 @@ public class OperatorDAO implements IOperatorDAO {
 		psswrd.addAll(betaSeq);
 
 		//Tal udvælges
-		Random rNum = new Random();
-		int noOfNums = 2 + rNum.nextInt(5);
+		int noOfNums = 2;
 		ArrayList<String> numSeq = new ArrayList<String>();
 		for(int i=0 ; i<noOfNums ; i++)
 		{
