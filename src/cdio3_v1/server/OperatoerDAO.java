@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 import cdio3_v1.shared.DALException;
+import cdio3_v1.shared.FieldVerifier;
 import cdio3_v1.shared.OperatorDTO;
 import cdio3_v1.server.Connector;
 import cdio3_v1.server.IOperatorDAO;
@@ -16,8 +17,6 @@ import java.sql.ResultSet;
 
 
 public class OperatoerDAO implements IOperatorDAO {
-
-	private ArrayList<OperatorDTO> operators = new ArrayList<OperatorDTO>();
 	
 	public void createOperator(OperatorDTO opr) throws DALException {
 		int newId = 0;
@@ -35,63 +34,100 @@ public class OperatoerDAO implements IOperatorDAO {
 		
 		String newPassword = generateNewPassword();
 		
+		//sendt fra view
+		if((FieldVerifier.isNewIdValid(newId)) && 
+		   (FieldVerifier.isNameValid(opr.getName())) && 
+		   (FieldVerifier.isIniValid(opr.getIni())) && 
+		   (FieldVerifier.isCprValid(opr.getCpr())) && 
+		   (FieldVerifier.isPasswordValid(newPassword)))
+		{
 		Connector.doUpdate(
 				"INSERT INTO operator(opr_id, opr_name, ini, cpr, password) VALUES " + 
 				"(" + newId + ", '" + opr.getName() + "', '" + opr.getIni() + "', '" + 
 				opr.getCpr() + "', '" + newPassword + "')"
 			);
+		}
 		
 	}
 
 	@Override
 	public void updateOperator(OperatorDTO opr) throws DALException {
 		
-		
-		
+		//Sendt fra view
+		if((FieldVerifier.isNewIdValid(opr.getID())) && 
+		   (FieldVerifier.isNameValid(opr.getName())) && 
+		   (FieldVerifier.isIniValid(opr.getIni())) && 
+		   (FieldVerifier.isCprValid(opr.getCpr())) && 
+		   (FieldVerifier.isPasswordValid(opr.getPassword())))
+		{
 		Connector.doUpdate(
 				"UPDATE operator SET  opr_name = '" + opr.getName() + "', ini =  '" + opr.getIni() + 
 				"', cpr = '" + opr.getCpr() + "', password = '" + opr.getPassword() + "' WHERE opr_id = " +
-				opr.getID()
-		);
+				opr.getID());
 		
+		}
+	
 	}
 	
 	@Override
 	public boolean deleteOperator(int oprId) throws DALException {
-		Connector.doUpdate("DELETE FROM operator WHERE id =  '" + oprId);
+		OperatorDTO deleteOperator = null;
+		
+			if ((opr.getID() == oprId))
+			{
+				deleteOperator = operator;
+			}
+			
+		if (deleteOperator == null)
+		{
+			throw new DALException("Ugyldigt operatør ID");
+		}
+		else
+		{
+			operators.remove(deleteOperator);
+		}
+
+		
+		
+		Connector.doUpdate(
+				"DELETE FROM operator WHERE id =  '" + oprId);
 		return true;
 	}
 	
 	@Override
 	public OperatorDTO getOperator(int oprId) throws DALException {
-		ResultSet rs = Connector.doQuery("SELECT * FROM operatoer WHERE opr_id = " + oprId);
+		ResultSet rs = Connector.doQuery("SELECT * FROM operator WHERE opr_id = " + oprId);
 	    try {
 	    	if (!rs.first()) throw new DALException("Operator " + oprId + " was not found");
-	    	return new OperatorDTO (rs.getInt("opr_id"), rs.getString("opr_name"), rs.getString("ini"), rs.getString("cpr"), rs.getString("password"));
+	    	return new OperatorDTO (rs.getInt("opr_id"), rs.getString("opr_name"), 
+	    							rs.getString("ini"), rs.getString("cpr"), rs.getString("password"));
 	    }
-	    catch (SQLException e) {throw new DALException(e); }
+	    catch (SQLException e) 
+	    {
+	    	throw new DALException(e); 
+	    }
 		
 	}
 	
 	@Override
 	public ArrayList<OperatorDTO> getOperatorList() throws DALException {
 		ArrayList<OperatorDTO> list = new ArrayList<OperatorDTO>();
-		ResultSet rs = Connector.doQuery("SELECT * FROM operatoer");
+		ResultSet rs = Connector.doQuery("SELECT * FROM operator");
 		try
 		{
 			while (rs.next()) 
 			{
-				list.add(new OperatorDTO(rs.getInt("opr_id"), rs.getString("opr_name"), rs.getString("ini"), rs.getString("cpr"), rs.getString("password")));
+				list.add(new OperatorDTO(rs.getInt("opr_id"), rs.getString("opr_name"), 
+										 rs.getString("ini"), rs.getString("cpr"), rs.getString("password")));
 			}
 		}
-		catch (SQLException e) { throw new DALException(e); }
+		catch (SQLException e) { 
+			throw new DALException(e); 
+		}
 		return list;
 	}
-
 	
-	
-	
-	
+	//Meto
 	private String generateNewPassword()
 	{
 		String password;

@@ -33,7 +33,12 @@ public class FieldVerifier {
 	 * @param name the name to validate
 	 * @return true if valid, false if invalid
 	 */
-	public static boolean isValidID(String oprId) {
+	
+	public static boolean isNameValid(String name) throws DALException{
+		return ((name.length() > 1) && (name.length() < 21));
+		
+	}
+	public static boolean isIdValid(String oprId) throws DALException {
 		if(oprId.length() == 0){
 			return false;
 		}
@@ -45,15 +50,25 @@ public class FieldVerifier {
 		return true;
 	}
 	
-	public static boolean newIdIsValid(int oprId)
+	public static boolean isNewIdValid(int oprId) throws DALException
 	{
 		return ((oprId > 0) && (oprId < 100000000));	
 	
 	}
 	
-	public static boolean checkCprID(String cpr) 
+	public static boolean isIniValid(String ini) throws DALException
+	{
+		return ((ini.length() > 1) && (ini.length() < 4));
+	}
+	
+	public static boolean isCprValid(String cpr) throws DALException
 	{ 
-
+		String cprFirstPart = cpr.substring(0,6);
+		String cprSecdondPart = cpr.substring(6);
+		if (cpr.charAt(6) != '-')
+		{
+			cpr = cprFirstPart + "-" + cprSecdondPart;
+		}
 		cpr = cpr.replace("-", "");// klipet striben i cprNummer
 		try
 		{
@@ -68,54 +83,55 @@ public class FieldVerifier {
 		}
 		catch(Exception e)
 		{
-			return false;
+			throw new DALException("CPR er ikke gyldigt");
 		}
 
 	}
 	
-	public static boolean isPasswordValid(String password){
+	public static boolean isPasswordValid(String password) throws DALException{
 		boolean passwordOK = false;
 		
-		if(password.length()>=6)
-		{
-			int smalls = 0;
-			int bigs = 0;
-			int nos = 0;
-			for(int i=0 ; i<password.length() ; i++)
+		try {
+			if((password.length()>6) && (password.length() < 9))
 			{
-				if(password.charAt(i)>='A' && password.charAt(i)<='Z'){
-					bigs ++;
+				int smalls = 0;
+				int bigs = 0;
+				int nos = 0;
+				for(int i=0 ; i<password.length() ; i++)
+				{
+					if(password.charAt(i)>='A' && password.charAt(i)<='Z'){
+						bigs ++;
+					}
+					if(password.charAt(i)>='a' && password.charAt(i)<='z'){
+						smalls ++;
+					}
+					if(password.charAt(i)>='0' && password.charAt(i)<='9'){
+						nos ++;
+					}
 				}
-				if(password.charAt(i)>='a' && password.charAt(i)<='z'){
-					smalls ++;
-				}
-				if(password.charAt(i)>='0' && password.charAt(i)<='9'){
-					nos ++;
-				}
-			}
 
-			if((bigs>=1) && (smalls>=1) && (nos>=1))
-			{
-				passwordOK = true;
+				if((bigs>=1) && (smalls>=1) && (nos>=1))
+				{
+					passwordOK = true;
+				}
+				
+				if(!passwordOK){
+					return false;
+				}
+				if(password.equals(null)){
+					return false;
+				}
+				else if(password.length() == 0){
+					return false;
+				}
 			}
-	
 		}
-		
-		if(password.equals(null)){
-			return false;
+		catch(Exception e)
+		{
+			throw new DALException("passwordet lever ikke op til standarden");
 		}
-		else if(password.length() == 0){
-			return false;
-		}
+		return passwordOK;
 		
-	
-		
-		
-		
-	
-		if(!passwordOK){
-			throw new DALException("Dit kodeord lever ikke op til de givne standarder.");
-		}
 	}
 	
 }
