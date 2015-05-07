@@ -42,6 +42,8 @@ public class deleteView extends Composite {
 		t.getFlexCellFormatter().setWidth(0, 0, "50px");
 		t.getFlexCellFormatter().setWidth(0, 1, "200px");
 		t.getFlexCellFormatter().setWidth(0, 2, "50px");
+		t.getFlexCellFormatter().setWidth(0, 3, "200px");
+		t.getFlexCellFormatter().setWidth(0, 4, "200px");
 
 		t.addStyleName("FlexTable");
 		t.getRowFormatter().addStyleName(0,"FlexTable-Header");
@@ -50,9 +52,9 @@ public class deleteView extends Composite {
 		// set headers in flextable
 		t.setText(0, 0, "Id");
 		t.setText(0, 1, "Navn");
-		t.setText(0, 3, "ini");
-		t.setText(0, 4, "pass");
-		t.setText(0, 5, "cpr");
+		t.setText(0, 2, "ini");
+		t.setText(0, 3, "pass");
+		t.setText(0, 4, "cpr");
 		
 	
 		// V 1. fetch persons from data layer
@@ -85,11 +87,11 @@ public class deleteView extends Composite {
 					t.setText(i+1, 0, "" + result.get(i).getID());
 					t.setText(i+1, 1, result.get(i).getName());
 					t.setText(i+1, 2, "" + result.get(i).getIni());
-					t.setText(i+1, 4, "" + result.get(i).getPassword());
-					t.setText(i+1, 5, "" + result.get(i).getCpr());
+					t.setText(i+1, 3, "" + result.get(i).getPassword());
+					t.setText(i+1, 4, "" + result.get(i).getCpr());
 					
 					Anchor delete = new Anchor("delete");
-					t.setWidget(i+1, 5, delete);	
+					t.setWidget(i+1, 4, delete);	
 					
 					delete.addClickHandler(new DeleteHandler());
 				}
@@ -158,15 +160,15 @@ public class deleteView extends Composite {
 
 				@Override
 				public void onClick(ClickEvent event) {
-					t.setWidget(eventRowIndex, 5, delete);
-					t.clearCell(eventRowIndex, 6);
+					t.setWidget(eventRowIndex, 4, delete);
+					t.clearCell(eventRowIndex, 5);
 				}
 
 			});
 
 			// showing ok and cancel widgets
-			t.setWidget(eventRowIndex, 5 , ok);
-			t.setWidget(eventRowIndex, 6 , cancel);
+			t.setWidget(eventRowIndex, 4 , ok);
+			t.setWidget(eventRowIndex, 5 , cancel);
 		}
 	}
 }
