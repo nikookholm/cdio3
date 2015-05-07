@@ -16,11 +16,11 @@ import java.util.List;
 
 public class OperatorDAO_db //extends RemoteServiceServlet implements Main 
 {
-	private static final String URL = "jdbc:mysql://localhost/cdio3";
+	private static final String URL = "jdbc:mysql://localhost/cdio3_v1";
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "";
 
-	private Connection connection = null;//Laver forbindelse, skal erstattes med TCP-connector
+	private Connection connection = null; //Laver forbindelse, som bruges i SQL-sætninger. 
 	
 	private PreparedStatement createOperatorStmt = null;
 	private PreparedStatement updateOperatorStmt = null;
@@ -34,9 +34,9 @@ public class OperatorDAO_db //extends RemoteServiceServlet implements Main
 		{
 			connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 		
-			createOperatorStmt = connection.prepareStatement( "INSERT INTO operator " + 
-					"(id, name, ini, cpr, password  ) " + 
-					"VALUES ( ?, ?, ?, ?, ? )" );
+			createOperatorStmt = connection.prepareStatement( 
+					"INSERT INTO operator " + 
+					"(id, name, ini, cpr, password  ) " + "VALUES ( ?, ?, ?, ?, ? )" );
 		
 			updateOperatorStmt = connection.prepareStatement( 
 							"UPDATE operator SET name = ?, "
@@ -44,9 +44,6 @@ public class OperatorDAO_db //extends RemoteServiceServlet implements Main
 			
 			getOperatorListStmt = connection.prepareStatement( 
 					"SELECT * FROM operator "); 
-			
-			getSizeStmt = connection.prepareStatement( 
-					"SELECT COUNT(*) FROM operator ");
 			
 			deleteOperatorStmt = connection.prepareStatement( 
 					"DELETE FROM operator WHERE id =  ? ");
@@ -79,12 +76,11 @@ public class OperatorDAO_db //extends RemoteServiceServlet implements Main
 	public void updateOperator(OperatorDTO operator) throws DALException
 	{
 		try {
-			updateOperatorStmt.setString(1, operator.getName());
-			updateOperatorStmt.setString(2, operator.getIni());
-			updateOperatorStmt.setString(3, operator.getCpr());
-			updateOperatorStmt.setString(4, operator.getPassword());
-			updateOperatorStmt.setInt(5, operator.getID());
-
+			updateOperatorStmt.setInt(1, operator.getID());
+			updateOperatorStmt.setString(2, operator.getName());
+			updateOperatorStmt.setString(3, operator.getIni());
+			updateOperatorStmt.setString(4, operator.getCpr());
+			updateOperatorStmt.setString(5, operator.getPassword());
 			updateOperatorStmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -103,7 +99,7 @@ public class OperatorDAO_db //extends RemoteServiceServlet implements Main
 
 			while ( resultSet.next() )
 			{
-				results.add( new OperatorDTO(
+				results.add(new OperatorDTO(
 						resultSet.getInt( "id" ),
 						resultSet.getString( "navn" ),
 						resultSet.getString( "ini" ),
@@ -125,7 +121,7 @@ public class OperatorDAO_db //extends RemoteServiceServlet implements Main
 			catch ( SQLException sqlException )
 			{
 				sqlException.printStackTrace();         
-				close();
+				
 			} 
 		} 
 		return results;
