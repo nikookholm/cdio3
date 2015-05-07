@@ -73,14 +73,49 @@ public class FieldVerifier {
 
 	}
 	
-	public static boolean isPasswordValid(String pw){
-		if(pw.equals(null)){
+	public static boolean isPasswordValid(String password){
+		boolean passwordOK = false;
+		
+		if(password.length()>=6)
+		{
+			int smalls = 0;
+			int bigs = 0;
+			int nos = 0;
+			for(int i=0 ; i<password.length() ; i++)
+			{
+				if(password.charAt(i)>='A' && password.charAt(i)<='Z'){
+					bigs ++;
+				}
+				if(password.charAt(i)>='a' && password.charAt(i)<='z'){
+					smalls ++;
+				}
+				if(password.charAt(i)>='0' && password.charAt(i)<='9'){
+					nos ++;
+				}
+			}
+
+			if((bigs>=1) && (smalls>=1) && (nos>=1))
+			{
+				passwordOK = true;
+			}
+	
+		}
+		
+		if(password.equals(null)){
 			return false;
 		}
-		else if(pw.length() == 0){
+		else if(password.length() == 0){
 			return false;
 		}
-		return pw.length() >= 6;
+		
+	
+		
+		
+		
+	
+		if(!passwordOK){
+			throw new DALException("Dit kodeord lever ikke op til de givne standarder.");
+		}
 	}
 	
 }

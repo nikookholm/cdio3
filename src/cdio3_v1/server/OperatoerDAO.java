@@ -15,7 +15,7 @@ import cdio3_v1.server.IOperatorDAO;
 import java.sql.ResultSet;
 
 
-public class OperatoerDAO_new implements IOperatorDAO {
+public class OperatoerDAO implements IOperatorDAO {
 
 	private ArrayList<OperatorDTO> operators = new ArrayList<OperatorDTO>();
 	
@@ -45,6 +45,9 @@ public class OperatoerDAO_new implements IOperatorDAO {
 
 	@Override
 	public void updateOperator(OperatorDTO opr) throws DALException {
+		
+		
+		
 		Connector.doUpdate(
 				"UPDATE operator SET  opr_name = '" + opr.getName() + "', ini =  '" + opr.getIni() + 
 				"', cpr = '" + opr.getCpr() + "', password = '" + opr.getPassword() + "' WHERE opr_id = " +
@@ -85,6 +88,10 @@ public class OperatoerDAO_new implements IOperatorDAO {
 		return list;
 	}
 
+	
+	
+	
+	
 	private String generateNewPassword()
 	{
 		String password;
@@ -158,4 +165,5 @@ public class OperatoerDAO_new implements IOperatorDAO {
 		return password;
 	}
 
+	
 }
