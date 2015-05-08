@@ -9,6 +9,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HasAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -43,7 +44,10 @@ public class OperatorMenu extends Composite{
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				mc.loadOperatorMenu();
+				Label lb = new Label("Der skal laves en Operatør update!!!!");
+				lb.setHorizontalAlignment(HasAlignment.ALIGN_CENTER);
+				vPanel.add(lb);
+				mc.loadUpdateView(); 
 				
 			}
 		});
