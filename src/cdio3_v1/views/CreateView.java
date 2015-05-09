@@ -41,28 +41,48 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 
 
 			createPanel = new VerticalPanel();
-			
-//			createPanel.setHeight("100px");
-//			HorizontalPanel namePanel = new HorizontalPanel();
-//			HorizontalPanel idPanel  = new HorizontalPanel();
-//			HorizontalPanel iniPanel  = new HorizontalPanel();
-//			HorizontalPanel passPanel  = new HorizontalPanel();
-//			HorizontalPanel cprPanel  = new HorizontalPanel();
+			createPanel.setHeight("150px");
 			
 			
-			initWidget(createPanel);
+			
+			
+			
+			initWidget(this.createPanel);
 
+			HorizontalPanel namePanel = new HorizontalPanel();
+			HorizontalPanel idPanel  = new HorizontalPanel();
+			HorizontalPanel iniPanel  = new HorizontalPanel();
+			HorizontalPanel passPanel  = new HorizontalPanel();
+			HorizontalPanel cprPanel  = new HorizontalPanel();
+			
 			nameLabel= new Label("navn");
+			nameLabel.setWidth("60px");
 			nameBox = new TextBox();
-
+			nameBox.setHeight("1em");
+			namePanel.add(nameLabel);
+			namePanel.add(nameBox);
+			
 			iniLabel = new Label("ini");
+			iniLabel.setWidth("60px");
 			iniBox = new TextBox();
+			iniBox.setHeight("1em");
+			iniPanel.add(iniLabel);
+			iniPanel.add(iniBox);
+			
 
 			passwordLabel = new Label("password");
+			passwordLabel.setWidth("100px");
 			passwordBox = new TextBox();
+			passwordBox.setHeight("1em");
+			passPanel.add(passwordLabel);
+			passPanel.add(passwordBox);
 
 			cprLabel = new Label("cpr");
+			cprLabel.setWidth("100px");
 			cprBox = new TextBox();
+			cprBox.setHeight("1em");
+			cprPanel.add(cprLabel);
+			cprPanel.add(cprBox);
 
 			createPanel.add(nameLabel);
 			createPanel.add(nameBox);
