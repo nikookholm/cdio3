@@ -1,5 +1,6 @@
 package cdio3_v1.views;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cdio3_v1.client.ClientSideImpl;
@@ -43,23 +44,26 @@ public class ReadView extends Composite {
 		
 		try {
 			clientImpl.service.read(new AsyncCallback<List<OperatorDTO>>() {
-				
-				@Override
-				public void onSuccess(List<OperatorDTO> liste) {
-					for (int i=0; i<liste.size() ; i++){
-						t.setText(i+1, 0, "" + liste.get(i).getName());
-						t.setText(i+1, 1, "" + liste.get(i).getIni());
-						t.setText(i+1, 2, "" + liste.get(i).getCpr());
-					}
-					
-				}
-				
+
 				@Override
 				public void onFailure(Throwable caught) {
-					Window.alert("Kunne ikke finde operatørlisten");
+					Window.alert("fejl");
+				}
+
+				@Override
+				public void onSuccess(List<OperatorDTO> result) {
+					for (int i=0; i<result.size() ; i++){
+						t.setText(i+1, 0, "" + result.get(i).getName());
+						t.setText(i+1, 1, "" + result.get(i).getIni());
+						t.setText(i+1, 2, "" + result.get(i).getCpr());
+			}
 					
 				}
-			});
+
+			
+
+				});
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

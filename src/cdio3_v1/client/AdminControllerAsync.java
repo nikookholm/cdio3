@@ -2,7 +2,7 @@ package cdio3_v1.client;
 
 //import java.util.List;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import cdio3_v1.server.WeightFunctions;
@@ -22,7 +22,7 @@ public interface AdminControllerAsync {
 	void create(OperatorDTO oDTO, AsyncCallback<Void> callback) throws Exception;
 	void update(OperatorDTO oDTO, AsyncCallback<Void> callback) throws Exception;
 	void delete(int id, AsyncCallback<Void> callback) throws Exception;
-	void read(AsyncCallback<ArrayList<OperatorDTO>> callback)throws Exception;
+	void read(AsyncCallback<List<OperatorDTO>> callback)throws Exception;
 	void login(String login, AsyncCallback<Boolean> callback) throws Exception;
 	void getOperator(OperatorDTO oDTO, AsyncCallback<Void> callback) throws Exception;
 	
