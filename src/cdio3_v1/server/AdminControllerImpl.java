@@ -13,8 +13,6 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 @SuppressWarnings("serial")
 public class AdminControllerImpl extends RemoteServiceServlet implements AdminController{
 
-	
-	
 	WeightFunctions weight;
 	OperatorDAO db = new OperatorDAO();
 	OperatorDTO opr;

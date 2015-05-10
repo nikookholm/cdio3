@@ -89,9 +89,10 @@ public class OperatorDAO extends RemoteServiceServlet implements IOperatorDAO {
 	}
 	
 	@Override
-	public void deleteOperator(int oprId) throws DALException {	
+	public boolean deleteOperator(int oprId) throws DALException {	
 		Connector.doUpdate(
 				"DELETE FROM operatoer WHERE id =  '" + oprId);
+		return true;
 	}
 	
 	@Override
