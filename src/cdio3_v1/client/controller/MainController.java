@@ -24,9 +24,6 @@ public class MainController {
 
 	public MainController() {
 
-
-		clientImpl = new ClientSideImpl(GWT.getModuleBaseURL() + "greet");
-
 		//		MenuView mv = new MenuView(this);
 		//		RootPanel.get("nav").add(mv);
 
@@ -43,44 +40,45 @@ public class MainController {
 		va.loadLogin();	
 
 	}
-
-	public void loadOperatorMenu(){
-		//RootPanel.get("nav").clear();
-		//AdminMenu om = new AdminMenu();
-		//RootPanel.get("nav").add(om);
-		//RootPanel.get("section").clear();
-
-	}
-
-	public void loadWeightView(){
-		RootPanel.get("section").clear();
-		va.loadWeightView();
-		RootPanel.get("section").add(va);
-
-	}
-	public void loadReadView() throws Exception{
-		RootPanel.get("section").clear();
-		va.loadReadView();
-		RootPanel.get("section").add(va);
-	}
-
-	public void loadCreateView(){
-		RootPanel.get("section").clear();
-		va.loadCreateView();
-		RootPanel.get("section").add(va);
-	}
-
-	public void loadUpdateView(){
-		RootPanel.get("section").clear();
-		va.loadUpdateView();
-		RootPanel.get("section").add(va);
-	}
-
-	public void loadDeleteView(){
-		RootPanel.get("section").clear();
-		va.loadDeleteView();
-		RootPanel.get("section").add(va);
-
-	}
 }
+
+//	public void loadOperatorMenu(){
+//		//RootPanel.get("nav").clear();
+//		//AdminMenu om = new AdminMenu();
+//		//RootPanel.get("nav").add(om);
+//		//RootPanel.get("section").clear();
+//
+//	}
+
+//	public void loadWeightView(){
+//		RootPanel.get("section").clear();
+//		va.loadWeightView();
+//		RootPanel.get("section").add(va);
+//
+//	}
+//	public void loadReadView() throws Exception{
+//		RootPanel.get("section").clear();
+//		va.loadReadView();
+//		RootPanel.get("section").add(va);
+//	}
+//
+//	public void loadCreateView(){
+//		RootPanel.get("section").clear();
+//		va.loadCreateView();
+//		RootPanel.get("section").add(va);
+//	}
+//
+//	public void loadUpdateView(){
+//		RootPanel.get("section").clear();
+//		va.loadUpdateView();
+//		RootPanel.get("section").add(va);
+//	}
+//
+//	public void loadDeleteView(){
+//		RootPanel.get("section").clear();
+//		va.loadDeleteView();
+//		RootPanel.get("section").add(va);
+//
+//	}
+//}
 

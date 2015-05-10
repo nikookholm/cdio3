@@ -1,5 +1,6 @@
 package cdio3_v1.views;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Anchor;
@@ -10,11 +11,13 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import cdio3_v1.shared.OperatorDTO;
 import cdio3_v1.views.OperatorMenu;
+import cdio3_v1.client.ClientSideImpl;
 import cdio3_v1.client.controller.MainController;
 
 public class AdminMenu extends Composite{
 	private VerticalPanel vPanel;
 	private MainController mc;
+	private ClientSideImpl clientImpl = new ClientSideImpl(GWT.getModuleBaseURL() + "greet");
 	//private OperatorMenu om;
 
 	// receive reference to MainView for call back
@@ -32,7 +35,7 @@ public class AdminMenu extends Composite{
 		//om = new OperatorMenu(mc);
 		//vPanel.add(om);
 		
-//		if (opr.getID() == 10)
+//		if (opr.getID() != 10)
 //		{
 //	
 //			Anchor create = new Anchor("Opret Operat\u00f8r");
@@ -81,7 +84,7 @@ public class AdminMenu extends Composite{
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				//mc.loadWeightView();
+				mc.mainView.show(new WeightView(clientImpl));
 				
 			}
 		});
