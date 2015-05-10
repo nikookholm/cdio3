@@ -36,7 +36,8 @@ public class CreateView extends Composite {
 	TextBox iniBox;
 	TextBox passwordBox;
 	TextBox cprBox;
-	Button okBtn = new Button("tilf\u00F8j");
+	Button okBtn = new Button("Tilf\u00F8j");
+
 
 	boolean nameValid = false;
 	boolean iniValid = false;
@@ -50,9 +51,6 @@ public class CreateView extends Composite {
 
 		createPanel = new VerticalPanel();
 		createPanel.setHeight("150px");
-
-
-
 
 
 		initWidget(this.createPanel);
@@ -101,20 +99,23 @@ public class CreateView extends Composite {
 		createPanel.add(cprLabel);
 		createPanel.add(cprBox);
 
+		createPanel.add(okBtn);
+
+
 		// use unicode escape sequence \u00F8 for '�'
 		okBtn = new Button("Tilf\u00F8j");
 		okBtn.setEnabled(false);
 
 		okBtn.addClickHandler(new ClickHandler() {
 
-		
+
 
 			@Override
 			public void onClick(ClickEvent event) {
 				OperatorDTO createPerson = new OperatorDTO(8, nameBox.getText(), iniBox.getText(), cprBox.getText(), passwordBox.getText());
-				
-				
-// 				skal tilgåes igennem admin, er ikke færdiglavet
+
+
+				// 				skal tilgåes igennem admin, er ikke færdiglavet
 				try {
 					clientImpl.service.create(createPerson, new AsyncCallback<Void>() {
 
@@ -130,17 +131,18 @@ public class CreateView extends Composite {
 						}
 
 					}
-);
+							);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-		}}
-	);
+				okBtn.setEnabled(true);
+			}}
+				);
 
-				
 
-			nameBox.addKeyUpHandler(new KeyUpHandler() {
-			
+
+		nameBox.addKeyUpHandler(new KeyUpHandler() {
+
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
 				try {
@@ -159,72 +161,66 @@ public class CreateView extends Composite {
 				}
 				okBtn.setEnabled(true);
 			}});
-		
-			
-			iniBox.addKeyUpHandler(new KeyUpHandler() {
-		
-				@Override
-				public void onKeyUp(KeyUpEvent event) {
-					try {
-						if(FieldVerifier.isIdValid(iniBox.getText())){
-							iniBox.setStyleName(iniBox.getText());
-							iniValid = false;
-						}
-						else{
-							iniBox.removeStyleName("gwt-TextBox-invalidEntry");
-							iniValid = true;
-						}	
-					} catch (DALException e) {
-						e.printStackTrace();
-					}
-					okBtn.setEnabled(true);
-				}
-			});
-			
-			
-			cprBox.addKeyUpHandler(new KeyUpHandler() {
-				
-				@Override
-				public void onKeyUp(KeyUpEvent event) {
-					try {
-						if(FieldVerifier.isIdValid(cprBox.getText())){
-							cprBox.setStyleName(cprBox.getText());
-							cprValid= false;
-						}
-						else{
-							cprBox.removeStyleName("gwt-TextBox-invalidEntry");
-							cprValid = true;
-						}	
-					} catch (DALException e) {
-						e.printStackTrace();
-					}
-					okBtn.setEnabled(true);
-				}
-			});
-			
-			passwordBox.addKeyUpHandler(new KeyUpHandler() {
-				
-				@Override
-				public void onKeyUp(KeyUpEvent event) {
-					try {
-						if(FieldVerifier.isIdValid(passwordBox.getText())){
-							passwordBox.setStyleName(passwordBox.getText());
-							passwordValid= false;
-						}
-						else{
-							passwordBox.removeStyleName("gwt-TextBox-invalidEntry");
-							passwordValid = true;
-						}	
-					} catch (DALException e) {
-						e.printStackTrace();
-					}
-					okBtn.setEnabled(true);
-				}
-			});
-			};}
-			
 
-		
-	
-	
-	
+
+		iniBox.addKeyUpHandler(new KeyUpHandler() {
+
+			@Override
+			public void onKeyUp(KeyUpEvent event) {
+				try {
+					if(FieldVerifier.isIdValid(iniBox.getText())){
+						iniBox.setStyleName(iniBox.getText());
+						iniValid = false;
+					}
+					else{
+						iniBox.removeStyleName("gwt-TextBox-invalidEntry");
+						iniValid = true;
+					}	
+				} catch (DALException e) {
+					e.printStackTrace();
+				}
+				okBtn.setEnabled(true);
+			}
+		});
+
+
+		cprBox.addKeyUpHandler(new KeyUpHandler() {
+
+			@Override
+			public void onKeyUp(KeyUpEvent event) {
+				try {
+					if(FieldVerifier.isIdValid(cprBox.getText())){
+						cprBox.setStyleName(cprBox.getText());
+						cprValid= false;
+					}
+					else{
+						cprBox.removeStyleName("gwt-TextBox-invalidEntry");
+						cprValid = true;
+					}	
+				} catch (DALException e) {
+					e.printStackTrace();
+				}
+				okBtn.setEnabled(true);
+			}
+		});
+
+		passwordBox.addKeyUpHandler(new KeyUpHandler() {
+
+			@Override
+			public void onKeyUp(KeyUpEvent event) {
+				try {
+					if(FieldVerifier.isIdValid(passwordBox.getText())){
+						passwordBox.setStyleName(passwordBox.getText());
+						passwordValid= false;
+					}
+					else{
+						passwordBox.removeStyleName("gwt-TextBox-invalidEntry");
+						passwordValid = true;
+					}	
+				} catch (DALException e) {
+					e.printStackTrace();
+				}
+				okBtn.setEnabled(true);
+			}
+		});
+	};}	
