@@ -54,7 +54,7 @@ public class AdminControllerImpl extends RemoteServiceServlet implements AdminCo
 		return cond;
 	}
 
-	public List<OperatorDTO> read(){
+	public List<OperatorDTO> read() throws DALException{
 		
 		List<OperatorDTO> ls = db.getOperatorList();
 		

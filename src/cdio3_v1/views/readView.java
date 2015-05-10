@@ -11,8 +11,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import dtu.client.service.KartotekServiceClientImpl;
-import dtu.shared.PersonDTO;
+
 
 public class readView extends Composite {
 
@@ -47,24 +46,29 @@ public class readView extends Composite {
 		//List<PersonDTO> personer = iPersonDAO.getPersons();
 
 		// V.2
-		clientImpl.service.getOperator(new AsyncCallback<List<OperatorDTO>>() {
+		try {
+			clientImpl.service.read(new AsyncCallback<List<OperatorDTO>>() {
 
-			@Override
-			public void onFailure(Throwable caught) {
-				Window.alert("Server fejl!" + caught.getMessage());
-			}
-
-			@Override
-			public void onSuccess(List<OperatorDTO> result) {
-				for (int i=0; i < result.size(); i++) {
-					t.setText(i+1, 0, "" + result.get(i).getName());
-					t.setText(i+1, 1, result.get(i).getIni());
-					t.setText(i+1, 2, "" + result.get(i).getCpr());
+				@Override
+				public void onFailure(Throwable caught) {
+					Window.alert("Server fejl!" + caught.getMessage());
 				}
 
-			}
+				@Override
+				public void onSuccess(List<OperatorDTO> result) {
+					for (int i=0; i < result.size(); i++) {
+						t.setText(i+1, 0, "" + result.get(i).getName());
+						t.setText(i+1, 1, result.get(i).getIni());
+						t.setText(i+1, 2, "" + result.get(i).getCpr());
+					}
 
-		});
+				}
+
+			});
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		readPanel.add(t);
 	}
