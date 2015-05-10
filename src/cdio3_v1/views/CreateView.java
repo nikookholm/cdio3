@@ -36,8 +36,7 @@ public class CreateView extends Composite {
 	TextBox iniBox;
 	TextBox passwordBox;
 	TextBox cprBox;
-	Button okBtn = new Button("Tilf\u00F8j");
-
+	Button okBtn;
 
 	boolean nameValid = false;
 	boolean iniValid = false;
@@ -100,14 +99,14 @@ public class CreateView extends Composite {
 		createPanel.add(cprBox);
 		
 		
-
+		okBtn = new Button("Tilf\u00F8j");
 		createPanel.add(okBtn);
 
 
 		// use unicode escape sequence \u00F8 for '�'
-		okBtn = new Button("Tilf\u00F8j");
 		
-		okBtn.setEnabled(true);
+		
+     	okBtn.setEnabled(true);
 
 		okBtn.addClickHandler(new ClickHandler() {
 
