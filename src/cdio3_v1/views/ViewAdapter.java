@@ -23,8 +23,8 @@ public class ViewAdapter extends Composite {
 
 	public void loadLogin(){
 		adapterPanel.clear();
-		LoginView login = new LoginView(clientImpl);
-		adapterPanel.add(login);
+//		LoginView login = new LoginView(clientImpl);
+	//	adapterPanel.add(login);
 	}
 
 	public void clear(){
@@ -45,8 +45,8 @@ public class ViewAdapter extends Composite {
 
 	public void loadReadView() throws Exception{
 		adapterPanel.clear();
-		readView rv = new readView(clientImpl);
-		adapterPanel.add(rv);
+	//	readView rv = new readView(clientImpl);
+	//	adapterPanel.add(rv);
 
 	}
 

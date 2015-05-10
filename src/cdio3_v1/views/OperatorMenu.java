@@ -24,44 +24,7 @@ public class OperatorMenu extends Composite{
 	 */
 	
 	public OperatorMenu(final MainController mc){
-		vPanel = new VerticalPanel();
-		initWidget(vPanel);
 		
-		Anchor useWeight = new Anchor("Benyt Vægten");
-		vPanel.add(useWeight);
-		useWeight.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				mc.loadWeightView();
-				
-			}
-		});
-		
-		Anchor changePassword = new Anchor("Ændr Password");
-		vPanel.add(changePassword);
-		changePassword.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				Label lb = new Label("Der skal laves en Operatør update!!!!");
-				lb.setHorizontalAlignment(HasAlignment.ALIGN_CENTER);
-				vPanel.add(lb);
-				mc.loadUpdateView(); 
-				
-			}
-		});
-		Anchor logOut = new Anchor("Log ud");
-		vPanel.add(logOut);
-		logOut.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-			
-				
-			}
-		});
-
 
 		}
 
