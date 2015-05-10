@@ -9,29 +9,34 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import cdio3_v1.client.ClientSideImpl;
+import cdio3_v1.shared.OperatorDTO;
 import cdio3_v1.views.AdminMenu;
+import cdio3_v1.views.MainView;
 import cdio3_v1.views.OperatorMenu;
 import cdio3_v1.views.ViewAdapter;
 
 
 public class MainController {
-	ClientSideImpl clientImpl;
-	ViewAdapter va;
-
+	ClientSideImpl     clientImpl;
+	ViewAdapter 	   va;
+	public MainView    mainView;
+	public OperatorDTO LoggedInOperator;
 
 	public MainController() {
 
 
 		clientImpl = new ClientSideImpl(GWT.getModuleBaseURL() + "greet");
 
-
-
 		//		MenuView mv = new MenuView(this);
 		//		RootPanel.get("nav").add(mv);
 
+		//va = new ViewAdapter(clientImpl);
+		
+		mainView = new MainView(this);
+		RootPanel.get().add(mainView);
 
-		va = new ViewAdapter(clientImpl);
-		RootPanel.get("section").add(va);	
+//		RootPanel.get("section").add(va);
+		//RootPanel.get("section").add(mainView);
 	}
 
 	public void run() {
@@ -40,10 +45,10 @@ public class MainController {
 	}
 
 	public void loadOperatorMenu(){
-		RootPanel.get("nav").clear();
-		AdminMenu om = new AdminMenu(this);
-		RootPanel.get("nav").add(om);
-		RootPanel.get("section").clear();
+		//RootPanel.get("nav").clear();
+		//AdminMenu om = new AdminMenu();
+		//RootPanel.get("nav").add(om);
+		//RootPanel.get("section").clear();
 
 	}
 

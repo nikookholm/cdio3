@@ -16,7 +16,7 @@ public class Main implements EntryPoint {
 
 	public void onModuleLoad() {
 
-	new MainController().run();
+		new MainController();
 	}
 	
 	

@@ -6,6 +6,7 @@ import cdio3_v1.client.controller.MainController;
 import cdio3_v1.shared.DALException;
 import cdio3_v1.shared.FieldVerifier;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
@@ -27,16 +28,19 @@ public class LoginView extends Composite {
 	TextBox passwordBox;
 	Button okBtn;
 	ClientSideImpl clientImpl;
+	MainController mc;
 	
 	// Flag der skal afgøre om ok knappen skal gøres tilgænglig
 	boolean pwBox = false; 
-	boolean uBox = false;
+	boolean uBox  = false;
 	
 	//midlertidig variabel til at kontrollere om views hænger sammen.
-	MainController mc = new MainController();
+	//MainController mc = new MainController();
 	
-	public LoginView(ClientSideImpl clientImpl){
-		this.clientImpl = clientImpl;
+	public LoginView(final MainController mc){
+		
+		this.mc = mc;
+		clientImpl  = new ClientSideImpl(GWT.getModuleBaseURL() + "greet");
 		this.vPanel = new VerticalPanel();
 		initWidget(vPanel);
 		
@@ -123,7 +127,8 @@ public class LoginView extends Composite {
 				String loginData = userBox.getText() + "," + passwordBox.getText();
 			
 				
-				mc.loadOperatorMenu();
+				mc.mainView.show(new AdminMenu(mc));
+				
 				
 				
 				
