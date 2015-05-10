@@ -21,7 +21,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class UpdateView extends Composite {
 
-	VerticalPanel editPanel;
+	VerticalPanel updatePanel;
 	FlexTable t;
 
 
@@ -30,21 +30,16 @@ public class UpdateView extends Composite {
 	TextBox iniBox;
 	TextBox passwordBox;
 	TextBox cprBox;
-	
+
 
 	// valid fields - initially a field is valid
 	boolean nameValid = true;
 	boolean iniValid = true;
 	boolean passValid = true;
 	boolean cprValid = true;
-	
 
 	int eventRowIndex;
 
-	// V.1 reference to data layer
-	// IPersonDAO iPersonDAO;
-
-	// V.2
 	ClientSideImpl clientImpl;
 
 
@@ -55,12 +50,10 @@ public class UpdateView extends Composite {
 	Anchor previousCancel = null;
 
 	public UpdateView(ClientSideImpl clientImpl) {
-		// V.1 this.iPersonDAO = iPersonDAO;
-		// v.2
 		this.clientImpl = clientImpl;
 
-		editPanel = new VerticalPanel();
-		initWidget(this.editPanel);
+		updatePanel = new VerticalPanel();
+		initWidget(this.updatePanel);
 
 		t = new FlexTable();
 
@@ -70,9 +63,6 @@ public class UpdateView extends Composite {
 		t.getFlexCellFormatter().setWidth(0, 2, "50px");
 		t.getFlexCellFormatter().setWidth(0, 3, "200px");
 		t.getFlexCellFormatter().setWidth(0, 4, "200px");
-
-
-		
 
 		// style table
 		t.addStyleName("FlexTable");
@@ -127,9 +117,7 @@ public class UpdateView extends Composite {
 
 		});
 
-
-
-		editPanel.add(t);
+		updatePanel.add(t);
 
 		// text boxes
 		nameBox = new TextBox();
@@ -138,7 +126,7 @@ public class UpdateView extends Composite {
 		cprBox = new TextBox();
 	}
 
-	private class EditHandler implements ClickHandler {
+	private class updateHandler implements ClickHandler {
 		public void onClick(ClickEvent event) {
 
 			// if previous edit open - force cancel operation�
@@ -153,7 +141,7 @@ public class UpdateView extends Composite {
 			iniBox.setText(t.getText(eventRowIndex, 2));
 			passwordBox.setText(t.getText(eventRowIndex, 3));
 			cprBox.setText(t.getText(eventRowIndex, 4));
-			
+
 
 			// show text boxes for editing
 			t.setWidget(eventRowIndex, 1, nameBox);
@@ -192,7 +180,7 @@ public class UpdateView extends Composite {
 					// fill DTO with id and new values 
 					OperatorDTO OperatorDTO = new OperatorDTO(
 							Integer.parseInt(t.getText(eventRowIndex, 0)), nameBox.getText(), iniBox.getText(), passwordBox.getText(), cprBox.getText()
-						);
+							);
 
 					// V.1 update object in backend
 					// iPersonDAO.updatePerson(personDTO, eventRowIndex-1);
@@ -233,81 +221,82 @@ public class UpdateView extends Composite {
 					// restore original content of textboxes and rerun input validation
 					nameBox.setText(name);
 					nameBox.fireEvent(new KeyUpEvent() {}); // validation
-					
+
 					iniBox.setText(ini);
 					iniBox.fireEvent(new KeyUpEvent() {});  // validation
-					
+
 					passwordBox.setText(password);
 					passwordBox.fireEvent(new KeyUpEvent(){});
-					
+
 					cprBox.setText(password);
 					cprBox.fireEvent(new KeyUpEvent(){});	
-						}
-					});
+				}
+			});
 
 
-					t.setText(eventRowIndex, 1, name);
-					t.setText(eventRowIndex, 2, ini);
-					t.setText(eventRowIndex, 3, password);
-					t.setText(eventRowIndex, 4, cpr);
+			t.setText(eventRowIndex, 1, name);
+			t.setText(eventRowIndex, 2, ini);
+			t.setText(eventRowIndex, 3, password);
+			t.setText(eventRowIndex, 4, cpr);
 
-					// restore edit link
-					t.setWidget(eventRowIndex, 3, edit);
-					t.clearCell(eventRowIndex, 4);
+			// restore edit link
+			t.setWidget(eventRowIndex, 3, edit);
+			t.clearCell(eventRowIndex, 4);
 
-					previousCancel = null;
+			previousCancel = null;
+		}
 	}
+
+
+
+	nameBox.addKeyUpHandler(new KeyUpHandler()){
+
+		@Override
+		public void onKeyUp(KeyUpEvent event) {
+			if (!FieldVerifier.isNameValid(nameBox.getText())) {
+				nameBox.setStyleName("gwt-TextBox-invalidEntry");
+				nameValid = false;
+			}
+			else {
+				nameBox.removeStyleName("gwt-TextBox-invalidEntry");
+				nameValid = true;
+
+			}if (!FieldVerifier.isIniValid(iniBox.getText())){
+				iniBox.setStyleName("gwt-TextBox-invalidEntry");
+				iniValid = false;
+
+			}else{
+				iniBox.removeStyleName("gwt-TextBox-invalidEntry");
+				iniValid = true;
+
+			}if (!FieldVerifier.isPassValid(passwordBox.getText())){
+				passwordBox.setStyleName("gwt-TextBox-invalidEntry");
+				passValid = false;
+
+			}else{
+				passwordBox.removeStyleName("gwt-TextBox-invalidEntry");
+				passValid = true;
+
+			}if (!FieldVerifier.isCprValid(cprBox.getText())){
+				cprBox.setStyleName("gwt-TextBox-invalidEntry");
+				cprValid = false;
+
+
+			}else{
+				cprBox.removeStyleName("gwt-TextBox-invalidEntry");
+				cprValid = true;
+
+
+				//					if (nameValid&&ageValid)
+				//						t.setWidget(eventRowIndex, 3, ok);
+				//					else
+				//						t.setText(eventRowIndex, 3, "ok");				
+				//				}
+
 			});
 
 
-			nameBox.addKeyUpHandler(new KeyUpHandler()){
-
-				@Override
-				public void onKeyUp(KeyUpEvent event) {
-					if (!FieldVerifier.isNameValid(nameBox.getText())) {
-						nameBox.setStyleName("gwt-TextBox-invalidEntry");
-						nameValid = false;
-					}
-					else {
-						nameBox.removeStyleName("gwt-TextBox-invalidEntry");
-						nameValid = true;
-						
-					}if (!FieldVerifier.isIniValid(iniBox.getText())){
-						iniBox.setStyleName("gwt-TextBox-invalidEntry");
-						iniValid = false;
-						
-					}else{
-						iniBox.removeStyleName("gwt-TextBox-invalidEntry");
-						iniValid = true;
-					
-					}if (!FieldVerifier.isPassValid(passwordBox.getText())){
-						passwordBox.setStyleName("gwt-TextBox-invalidEntry");
-						passValid = false;
-						
-					}else{
-						passwordBox.removeStyleName("gwt-TextBox-invalidEntry");
-						passValid = true;
-						
-					}if (!FieldVerifier.isCprValid(cprBox.getText())){
-						cprBox.setStyleName("gwt-TextBox-invalidEntry");
-						cprValid = false;
-						
-						
-					}else{
-						cprBox.removeStyleName("gwt-TextBox-invalidEntry");
-						cprValid = true;
-					
-
-//					if (nameValid&&ageValid)
-//						t.setWidget(eventRowIndex, 3, ok);
-//					else
-//						t.setText(eventRowIndex, 3, "ok");				
-//				}
-
-			});
-			
-			
-				JEG 
+			JEG 
 			ageTxt.addKeyUpHandler(new KeyUpHandler(){
 
 				@Override

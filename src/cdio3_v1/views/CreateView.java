@@ -36,9 +36,12 @@ public class CreateView extends Composite {
 	TextBox iniBox;
 	TextBox passwordBox;
 	TextBox cprBox;
-	Button save = new Button("tilf\u00F8j");
+	Button okBtn = new Button("tilf\u00F8j");
 
 	boolean nameValid = false;
+	boolean iniValid = false;
+	boolean passwordValid = false;
+	boolean cprValid = false;
 
 
 
@@ -98,14 +101,11 @@ public class CreateView extends Composite {
 		createPanel.add(cprLabel);
 		createPanel.add(cprBox);
 
-		boolean userBox = false;
-		boolean passBox = false;
-
 		// use unicode escape sequence \u00F8 for '�'
-		save = new Button("Tilf\u00F8j");
-		save.setEnabled(false);
+		okBtn = new Button("Tilf\u00F8j");
+		okBtn.setEnabled(false);
 
-		save.addClickHandler(new ClickHandler() {
+		okBtn.addClickHandler(new ClickHandler() {
 
 		
 
@@ -114,25 +114,32 @@ public class CreateView extends Composite {
 				OperatorDTO createPerson = new OperatorDTO(8, nameBox.getText(), iniBox.getText(), cprBox.getText(), passwordBox.getText());
 				
 				
-				// skal tilgåes igennem admin, er ikke færdiglavet
-//				clientImpl.service.savePerson(newPerson, new AsyncCallback<Void>() {
+// 				skal tilgåes igennem admin, er ikke færdiglavet
+				try {
+					clientImpl.service.create(createPerson, new AsyncCallback<Void>() {
 
-//				@Override
-//				public void onSuccess(Void result) {
-//					Window.alert("Operator gemt i databasen");
-//			}
-
-//				@Override
-//				public void onFailure(Throwable caught) {
-//				Window.alert("Server fejl" + caught.getMessage());
-//				}
-//			});
-//		}
-//	});
+						@Override
+						public void onSuccess(Void result) {
+							Window.alert("Person gemt i kartotek");
+						}
 
 
-		KeyUpHandler keyuh = new KeyUpHandler() {
+						@Override
+						public void onFailure(Throwable caught) {
+							Window.alert("Server fejl!" + caught.getMessage());
+						}
 
+					}
+);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		}}
+	);
+
+				
+
+			nameBox.addKeyUpHandler(new KeyUpHandler() {
 			
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
@@ -150,15 +157,72 @@ public class CreateView extends Composite {
 				} catch (DALException e) {
 					e.printStackTrace();
 				}
-			}};
-
+				okBtn.setEnabled(true);
+			}});
 		
-			nameBox.addKeyUpHandler(keyuh);
-			iniBox.addKeyUpHandler(keyuh);
-			cprBox.addKeyUpHandler(keyuh);
-			passwordBox.addKeyUpHandler(keyuh);
 			
-			}});}}
+			iniBox.addKeyUpHandler(new KeyUpHandler() {
+		
+				@Override
+				public void onKeyUp(KeyUpEvent event) {
+					try {
+						if(FieldVerifier.isIdValid(iniBox.getText())){
+							iniBox.setStyleName(iniBox.getText());
+							iniValid = false;
+						}
+						else{
+							iniBox.removeStyleName("gwt-TextBox-invalidEntry");
+							iniValid = true;
+						}	
+					} catch (DALException e) {
+						e.printStackTrace();
+					}
+					okBtn.setEnabled(true);
+				}
+			});
+			
+			
+			cprBox.addKeyUpHandler(new KeyUpHandler() {
+				
+				@Override
+				public void onKeyUp(KeyUpEvent event) {
+					try {
+						if(FieldVerifier.isIdValid(cprBox.getText())){
+							cprBox.setStyleName(cprBox.getText());
+							cprValid= false;
+						}
+						else{
+							cprBox.removeStyleName("gwt-TextBox-invalidEntry");
+							cprValid = true;
+						}	
+					} catch (DALException e) {
+						e.printStackTrace();
+					}
+					okBtn.setEnabled(true);
+				}
+			});
+			
+			passwordBox.addKeyUpHandler(new KeyUpHandler() {
+				
+				@Override
+				public void onKeyUp(KeyUpEvent event) {
+					try {
+						if(FieldVerifier.isIdValid(passwordBox.getText())){
+							passwordBox.setStyleName(passwordBox.getText());
+							passwordValid= false;
+						}
+						else{
+							passwordBox.removeStyleName("gwt-TextBox-invalidEntry");
+							passwordValid = true;
+						}	
+					} catch (DALException e) {
+						e.printStackTrace();
+					}
+					okBtn.setEnabled(true);
+				}
+			});
+			};}
+			
 
 		
 	

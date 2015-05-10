@@ -44,7 +44,7 @@ public class ReadView extends Composite {
 
 		
 		
-		List<OperatorDTO> personer = OperatorDTO.
+		List<OperatorDTO> personer = OperatorDTO
 
 	
 
