@@ -42,12 +42,11 @@ public class readView extends Composite {
 		t.setText(0, 2, "Password");
 		t.setText(0, 3, "cpr");
 
-		// V.1
-		//List<PersonDTO> personer = iPersonDAO.getPersons();
+		
+		
+		List<OperatorDTO> personer = OperatorDTO.
 
-		// V.2
-		try {
-			clientImpl.service.read(new AsyncCallback<List<OperatorDTO>>() {
+	
 
 				@Override
 				public void onFailure(Throwable caught) {
@@ -57,6 +56,7 @@ public class readView extends Composite {
 				@Override
 				public void onSuccess(List<OperatorDTO> result) {
 					for (int i=0; i < result.size(); i++) {
+						
 						t.setText(i+1, 0, "" + result.get(i).getName());
 						t.setText(i+1, 1, result.get(i).getIni());
 						t.setText(i+1, 2, "" + result.get(i).getCpr());
@@ -66,7 +66,7 @@ public class readView extends Composite {
 
 			});
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 

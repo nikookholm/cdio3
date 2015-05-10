@@ -30,6 +30,7 @@ public class updateView extends Composite {
 	TextBox iniBox;
 	TextBox passwordBox;
 	TextBox cprBox;
+	
 
 	// valid fields - initially a field is valid
 	boolean nameValid = true;
@@ -53,7 +54,7 @@ public class updateView extends Composite {
 	// previous cancel anchor
 	Anchor previousCancel = null;
 
-	public EditView(KartotekServiceClientImpl clientImpl) {
+	public updateView(ClientSideImpl clientImpl) {
 		// V.1 this.iPersonDAO = iPersonDAO;
 		// v.2
 		this.clientImpl = clientImpl;
