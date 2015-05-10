@@ -46,11 +46,11 @@ public class OperatorDAO extends RemoteServiceServlet implements IOperatorDAO {
 		{
 			throw new DALException("SQL-fejl: "+e.getMessage());
 		}
-		System.out.println("Tilføjer password");
+
 		String newPassword = generateNewPassword();
-		
+
 		//tjekkene der sendes fra view
-		if((FieldVerifier.isNewIdValid(newId)) && 
+		if((FieldVerifier.isNewIdValid(opr.getID())) && 
 		   (FieldVerifier.isNameValid(opr.getName())) && 
 		   (FieldVerifier.isIniValid(opr.getIni())) && 
 		   (FieldVerifier.isCprValid(opr.getCpr())) && 
@@ -88,10 +88,9 @@ public class OperatorDAO extends RemoteServiceServlet implements IOperatorDAO {
 	}
 	
 	@Override
-	public boolean deleteOperator(int oprId) throws DALException {	
+	public void deleteOperator(int oprId) throws DALException {	
 		Connector.doUpdate(
 				"DELETE FROM operatoer WHERE id =  '" + oprId);
-		return true;
 	}
 	
 	@Override
@@ -126,6 +125,10 @@ public class OperatorDAO extends RemoteServiceServlet implements IOperatorDAO {
 		}
 		return list;
 	}
+	
+	
+	
+	
 	
 	//Metoden, der genererer et password ud fra DTU's krav.
 	static String generateNewPassword()

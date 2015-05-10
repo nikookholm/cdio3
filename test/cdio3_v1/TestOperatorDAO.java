@@ -32,7 +32,7 @@ public class TestOperatorDAO {
 	@Test
 	public void testCreateOperator() throws DALException
 	{
-		List<OperatorDTO> list = opDao.getOperatorList();
+		ArrayList<OperatorDTO> list = opDao.getOperatorList();
 		int currentHighestID  = list.get(list.size()-1).getID();
 		
 		int expected = opDao.getOperatorList().size()+1;

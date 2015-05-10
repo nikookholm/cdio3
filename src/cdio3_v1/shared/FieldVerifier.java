@@ -39,7 +39,7 @@ public class FieldVerifier {
 		
 	}
 	
-	/*public static boolean isIdValid(String oprId) throws DALException {
+	public static boolean isIdValid(String oprId) throws DALException {
 		if(oprId.length() == 0){
 			return false;
 		}
@@ -49,7 +49,7 @@ public class FieldVerifier {
 			}
 		}
 		return true;
-	}*/
+	}
 	
 	public static boolean isNewIdValid(int oprId) throws DALException
 	{
