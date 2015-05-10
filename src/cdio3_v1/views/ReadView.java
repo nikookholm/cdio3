@@ -22,12 +22,8 @@ public class ReadView extends Composite {
 
 	VerticalPanel readPanel;
 	AdminControllerImpl impl;
-	
-	// reference to data layer
-	// IPersonDAO iPersonDAO;
 
 	public ReadView(ClientSideImpl clientImpl) throws DALException {
-		//	this.iPersonDAO = iPersonDAO;
 
 		readPanel = new VerticalPanel();
 		initWidget(this.readPanel);
@@ -41,7 +37,6 @@ public class ReadView extends Composite {
 		t.addStyleName("FlexTable");
 		t.getRowFormatter().addStyleName(0,"FlexTable-Header");
 		
-		// set headers in flextable
 		t.setText(0, 0, "Navn");
 		t.setText(0, 1, "Ini");
 		t.setText(0, 2, "cpr");
