@@ -25,7 +25,7 @@ public interface AdminController extends RemoteService {
 		public void delete(int id)throws Exception;
 		public List<OperatorDTO> read()throws Exception;
 		public boolean login(String login)throws Exception;
-		public void getOperator(OperatorDTO oDTO) throws Exception;
+		public OperatorDTO getOperator(int ID) throws Exception;
 		
 	
 

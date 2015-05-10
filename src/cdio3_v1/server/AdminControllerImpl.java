@@ -92,11 +92,9 @@ public class AdminControllerImpl extends RemoteServiceServlet implements AdminCo
 		return weight.getWeight();
 	}
 
-	@Override
-	public void getOperator(OperatorDTO oDTO) throws Exception {
-		// TODO Auto-generated method stub
+	
 		
-	}
+	
 	
 	
 }
