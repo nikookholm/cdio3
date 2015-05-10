@@ -13,21 +13,21 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class AdminControllerImpl extends RemoteServiceServlet implements AdminController{
 	
 	WeightFunctions weight;
-	OperatorDAO db;
+	OperatorDAO db = new OperatorDAO();
 	OperatorDTO opr;
 	
 	public void create(OperatorDTO opr) throws Exception{	
-		
+		Connector con = new Connector();
 		db.createOperator(opr);
 	}
 
 	public void update(OperatorDTO opr) throws Exception{
-		
+		Connector con = new Connector();
 		db.createOperator(opr);
 	}
 
 	public void delete(int ID) throws Exception{
-		
+		Connector con = new Connector();
 		boolean cond;
 		int id = opr.getID();
 		
@@ -39,7 +39,7 @@ public class AdminControllerImpl extends RemoteServiceServlet implements AdminCo
 	}
 
 	public boolean login(String idAndPswd) throws Exception{
-		
+		Connector con = new Connector();
 		boolean cond = false;
 		
 		int id = Integer.parseInt(idAndPswd.substring(0, idAndPswd.indexOf(","))); 
@@ -55,14 +55,14 @@ public class AdminControllerImpl extends RemoteServiceServlet implements AdminCo
 	}
 	
 	public OperatorDTO getOperator(int ID){
-		
+		Connector con = new Connector();
 		opr = db.getOperator(ID);
 		
 		return opr;
 	}
 
 	public List<OperatorDTO> read() throws DALException{
-		
+		Connector con = new Connector();
 		List<OperatorDTO> ls = db.getOperatorList();
 		
 		return ls;
