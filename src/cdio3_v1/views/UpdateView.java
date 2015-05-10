@@ -137,26 +137,19 @@ public class UpdateView extends Composite {
 //				@Override
 //				public void onClick(ClickEvent event) {
 //
-//					// remove inputboxes
+//				
 //					t.setText(eventRowIndex, 1, nameBox.getText());
 //					t.setText(eventRowIndex, 2, iniBox.getText());
 //					t.setText(eventRowIndex, 3, passwordBox.getText());
 //					t.setText(eventRowIndex, 4, cprBox.getText());
 //
 //
-//					// here you will normally fetch the primary key of the row 
-//					// and use it for location the object to be edited
 //
-//					// fill DTO with id and new values 
+//					
 //					OperatorDTO OperatorDTO = new OperatorDTO(
 //							Integer.parseInt(t.getText(eventRowIndex, 0)), nameBox.getText(), iniBox.getText(), passwordBox.getText(), cprBox.getText()
 //							);
 //
-//					// V.1 update object in backend
-//					// iPersonDAO.updatePerson(personDTO, eventRowIndex-1);
-//
-//
-//					// V.2
 //					clientImpl.service.updateOperator(OperatorDTO, new AsyncCallback<Void>() {
 //
 //						@Override
@@ -166,12 +159,10 @@ public class UpdateView extends Composite {
 //
 //						@Override
 //						public void onFailure(Throwable caught) {
-//							Window.alert("Server fejl!" + caught.getMessage());
+//							Window.alert("Server fejl" + caught.getMessage());
 //						}
-//
 //					});
 //
-//					// restore edit link
 //					t.setWidget(eventRowIndex, 3, edit);
 //					t.clearCell(eventRowIndex, 4);
 //
@@ -188,7 +179,6 @@ public class UpdateView extends Composite {
 //				@Override
 //				public void onClick(ClickEvent event) {
 //
-//					// restore original content of textboxes and rerun input validation
 //					nameBox.setText(name);
 //					nameBox.fireEvent(new KeyUpEvent() {}); // validation
 //
@@ -209,8 +199,7 @@ public class UpdateView extends Composite {
 //			t.setText(eventRowIndex, 3, password);
 //			t.setText(eventRowIndex, 4, cpr);
 //
-//			// restore edit link
-//			t.setWidget(eventRowIndex, 3, edit);
+//			t.setWidget(eventRowIndex, 3, update);
 //			t.clearCell(eventRowIndex, 4);
 //
 //			previousCancel = null;
@@ -272,7 +261,6 @@ public class UpdateView extends Composite {
 //						ageValid = true;
 //					}
 //
-//					// enable/disable ok depending on form status 
 //					if (nameValid&&ageValid)
 //						t.setWidget(eventRowIndex, 3, ok);
 //					else
@@ -281,7 +269,6 @@ public class UpdateView extends Composite {
 //
 //			});
 //
-//			// showing ok and cancel widgets
 //			t.setWidget(eventRowIndex, 3 , ok);
 //			t.setWidget(eventRowIndex, 4 , cancel);		
 //		}
