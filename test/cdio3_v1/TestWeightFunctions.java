@@ -39,12 +39,4 @@ public class TestWeightFunctions {
 		assertTrue(condition);
 	}
 	
-	@Test
-	public void testSendRM20() throws Exception{
-		WeightFunctions weight = new WeightFunctions();
-		
-		String actual = weight.sendRM20("Test");
-		
-		assertEquals("RM20 B", actual);
-	}
 }
