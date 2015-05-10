@@ -6,7 +6,7 @@ import org.junit.*;
 
 import cdio3_v1.server.*;
 
-public class testWeightFunctions {
+public class TestWeightFunctions {
 	
 	@Test
 	public void testTara() throws Exception{
