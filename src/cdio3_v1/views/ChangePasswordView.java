@@ -26,7 +26,7 @@ public class ChangePasswordView extends Composite {
 	public ChangePasswordView(OperatorDTO dto){
 
 
-		VerticalPanel passwordView;
+		VerticalPanel passwordView = new VerticalPanel();
 
 		passwordView.add(currentPassword);
 		passwordView.add(newPassword);
@@ -34,7 +34,8 @@ public class ChangePasswordView extends Composite {
 
 		okBtn = new Button("OK\u00F8j");
 		cancelBtn = new Button("Cancel\u00F8j");
-		
+	}
+		@SuppressWarnings("unused")
 		private void okButtonEnabler(){
 			if(newPassword == newPasswordAgain){
 				okBtn.setEnabled(true);
@@ -42,6 +43,7 @@ public class ChangePasswordView extends Composite {
 			else{
 				okBtn.setEnabled(false);
 			}
+		
 		
 
 

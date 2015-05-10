@@ -101,9 +101,6 @@ public class CreateView extends Composite {
 		
 		okBtn = new Button("Tilf\u00F8j");
 		createPanel.add(okBtn);
-
-
-		// use unicode escape sequence \u00F8 for '�'
 		
 		
      	okBtn.setEnabled(true);
@@ -117,13 +114,12 @@ public class CreateView extends Composite {
 				OperatorDTO createPerson = new OperatorDTO(8, nameBox.getText(), iniBox.getText(), cprBox.getText(), passwordBox.getText());
 
 
-				// 				skal tilgåes igennem admin, er ikke færdiglavet
 				try {
 					clientImpl.service.create(createPerson, new AsyncCallback<Void>() {
 
 						@Override
 						public void onSuccess(Void result) {
-							Window.alert("Person gemt i kartotek");
+							Window.alert("Operator gemt i systemet");
 						}
 
 

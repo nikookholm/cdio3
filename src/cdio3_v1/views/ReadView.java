@@ -47,7 +47,7 @@ public class ReadView extends Composite {
 
 				@Override
 				public void onFailure(Throwable caught) {
-					Window.alert("fejl");
+					Window.alert("fejl kunne ikke finde liste");
 				}
 
 				@Override

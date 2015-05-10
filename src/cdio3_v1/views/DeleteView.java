@@ -47,38 +47,6 @@ public class DeleteView extends Composite {
 		deletePanel.add(ok);
 		deletePanel.add(cancel);
 	
-//		t = new FlexTable();
-//		t.getFlexCellFormatter().setWidth(0, 0, "50px");
-//		t.getFlexCellFormatter().setWidth(0, 1, "200px");
-//		t.getFlexCellFormatter().setWidth(0, 2, "50px");
-//		t.getFlexCellFormatter().setWidth(0, 3, "200px");
-//		t.getFlexCellFormatter().setWidth(0, 4, "200px");
-//
-//		t.addStyleName("FlexTable");
-//		t.getRowFormatter().addStyleName(0,"FlexTable-Header");
-//
-//
-//		// set headers in flextable
-//		t.setText(0, 0, "Id");
-//		t.setText(0, 1, "Navn");
-//		t.setText(0, 2, "ini");
-//		t.setText(0, 3, "pass");
-//		t.setText(0, 4, "cpr");
-//		
-//	
-		// V 1. fetch persons from data layer
-		// List<PersonDTO> personer = iPersonDAO.getPersons();
-
-		// V.1 populate table and add delete anchor to each row
-//		for (int rowIndex=0; rowIndex < personer.size(); rowIndex++) {
-//			t.setText(rowIndex+1, 0, personer.get(rowIndex).getNavn());
-//			t.setText(rowIndex+1, 1, "" + personer.get(rowIndex).getAlder());
-//			Anchor delete = new Anchor("delete");
-//			t.setWidget(rowIndex+1, 2, delete);
-//
-//			delete.addClickHandler(new DeleteHandler());
-//		}
-
 	}
 
 	private class OkHandler implements ClickHandler {
@@ -100,7 +68,6 @@ public class DeleteView extends Composite {
 					}
 				});
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

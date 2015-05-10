@@ -24,14 +24,12 @@ public class UpdateView extends Composite {
 	FlexTable t;
 
 
-	// editing text boxes
 	TextBox nameBox;
 	TextBox iniBox;
 	TextBox passwordBox;
 	TextBox cprBox;
 
 
-	// valid fields - initially a field is valid
 	boolean nameValid = true;
 	boolean iniValid = true;
 	boolean passValid = true;
@@ -42,10 +40,8 @@ public class UpdateView extends Composite {
 	ClientSideImpl clientImpl;
 
 
-	// person list
 	List<OperatorDTO> personer;
 
-	// previous cancel anchor
 	Anchor previousCancel = null;
 
 	public UpdateView(ClientSideImpl clientImpl) {
@@ -56,17 +52,14 @@ public class UpdateView extends Composite {
 
 		t = new FlexTable();
 
-		// adjust column widths
 		t.getFlexCellFormatter().setWidth(0, 0, "200px");
 		t.getFlexCellFormatter().setWidth(0, 1, "50px");
 		t.getFlexCellFormatter().setWidth(0, 2, "200px");
 		t.getFlexCellFormatter().setWidth(0, 3, "200px");
 
-		// style table
 		t.addStyleName("FlexTable");
 		t.getRowFormatter().addStyleName(0,"FlexTable-Header");
 
-		// set headers in flextable
 
 		t.setText(0, 0, "Navn");
 		t.setText(0, 1, "ini");
