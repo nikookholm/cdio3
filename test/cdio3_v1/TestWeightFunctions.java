@@ -12,28 +12,29 @@ public class TestWeightFunctions {
 	public void testTara() throws Exception{
 		WeightFunctions weight = new WeightFunctions();
 		double actual = weight.tara();
-		boolean condition = false;
-		if(actual != 0){
-			condition = true;
-		}
-		assertTrue(condition);
-	}
+		double expected = 1.0;
+		double delta = 0.2;
 
+		assertEquals(expected, actual, delta);
+	}
+	
+	//Needs the weight to be set to 1.0kg
 	@Test
 	public void testGetWeight() throws Exception{
 		WeightFunctions weight = new WeightFunctions();
-		double actual = weight.getWeight();
-		boolean condition = false;
-		if(actual != 0){
-			condition = true;
-		}
-		assertTrue(condition);
+		
+		double actual = weight.tara();
+		double expected = 1.0;
+		double delta = 0.2;
+
+		assertEquals(expected, actual, delta);
 	}
 	
 	@Test
 	public void testSendMessage() throws Exception{
 		WeightFunctions weight = new WeightFunctions();
-		boolean condition = weight.sendMessage("thisBeATest");
+		boolean condition = true;
+		condition = weight.sendMessage("thisBeATest");
 		
 		assertTrue(condition);
 	}
@@ -41,14 +42,9 @@ public class TestWeightFunctions {
 	@Test
 	public void testSendRM20() throws Exception{
 		WeightFunctions weight = new WeightFunctions();
-		String str = weight.sendRM20("thisBeATest");
-		boolean condition;
-		if(str.isEmpty()){
-			condition = false;
-		}else{
-			condition = true;
-		}
 		
-		assertTrue(condition);
+		String actual = weight.sendRM20("Test");
+		
+		assertEquals("RM20 B", actual);
 	}
 }
