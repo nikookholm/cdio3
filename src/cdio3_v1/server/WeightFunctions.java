@@ -2,7 +2,7 @@ package cdio3_v1.server;
 
 public class WeightFunctions {
 	
-	String host = "localhost"; 
+	String host = "10.16.172.215"; 
 	int    port = 4567;
 	
 	TCPConnector tcp;
@@ -18,12 +18,14 @@ public class WeightFunctions {
 		String temp;
 		tcp.send("T\r\n");
 		temp = tcp.receive();
-		if (temp.split(" ")[0] == "T")
+		System.out.println(temp);
+		if ("T".equals(temp.split(" ")[0]))
 		{
-			return Double.parseDouble(temp.split(" ")[1]);
+			return Double.parseDouble(temp.split("\\s+")[2]);
 		}
 		else
 		{
+			System.out.println(">>>");
 			return null;
 		}
 	}
@@ -33,9 +35,9 @@ public class WeightFunctions {
 		String temp;
 		tcp.send("S\r\n");
 		temp = tcp.receive();
-		if (temp.split(" ")[0] == "S")
+		if ("S".equals(temp.split(" ")[0]))
 		{
-			return Double.parseDouble(temp.split(" ")[1]);
+			return Double.parseDouble(temp.split("\\s+")[2]);
 		}
 		else
 		{
@@ -45,15 +47,20 @@ public class WeightFunctions {
 	
 	public boolean sendMessage(String message)
 	{
-		tcp.send(message + "\r\n");
-		return (tcp.receive()=="D\r\n")? true : false;
+		tcp.send("D " + message + "\r\n");
+		return ("D A".equals(tcp.receive())) ? true : false;
 	}
 	
 	public String sendRM20(String message)
 	{
 		String result;
-		tcp.send(message);
-		if ((result = tcp.receive()).indexOf("RM20 B") >= -1)
+		int type = 8;
+		String request = "RM20 " + type + " \"" + message + "\" \" \" \" \"\r\n";
+		tcp.send(request);
+		result = tcp.receive();
+		System.out.println(result);
+		
+		if (result.startsWith("RM20 B"))
 		{
 			return tcp.receive();
 		}
