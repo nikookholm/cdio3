@@ -1,8 +1,10 @@
 package cdio3_v1.server;
 
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -110,75 +112,67 @@ public class OperatorDAO implements IOperatorDAO {
 	}
 	
 	//Metoden, der genererer et password ud fra DTU's krav.
-	private String generateNewPassword()
+	static String generateNewPassword()
 	{
 		String password;
-		//Opretter et array og giver det værdierne som ligger imellem A og Z i ASCII rækken
+
 		ArrayList<String> alpha = new ArrayList<String>(26);
-		for (char c='A'; c<='Z' ; c++)
-		{
+		for (char c='A'; c<='Z' ; c++){
 			alpha.add(String.valueOf(c));
 		}
 
-		//Tilsvarende for a-z
 		ArrayList<String> beta = new ArrayList<String>(26);
-		for (char c='a'; c<='z' ; c++)
-		{
+		for (char c='a'; c<='z' ; c++){
 			beta.add(String.valueOf(c));
 		}
 
-		//Og tal
 		ArrayList<String> num = new ArrayList<String>();
-		for (char c='0'; c<='9' ; c++)
-		{
+		for (char c='0'; c<='9' ; c++){
 			num.add(String.valueOf(c));
 		}
 
-		//Laver en ny arrayList, og der udplukkes et tilfældigt antal af tilfældige bogstaver
-		int noOfAlphas = 3; //Det antal som skal udplukkes
-		ArrayList<String> alphaSeq = new ArrayList<String>(); //ArrayList til at gemme dem i
-		for(int i=0 ; i<noOfAlphas ; i++)
-		{
+		int noOfAlphas = 2;
+		ArrayList<String> alphaSeq = new ArrayList<String>();
+		for(int i=0 ; i<noOfAlphas ; i++){
 			Random r = new Random();
-			alphaSeq.add(alpha.get(r.nextInt(alpha.size()))); //Og her vælges hvilke det skal være
+			alphaSeq.add(alpha.get(r.nextInt(alpha.size())));
 		}
-		//En ny arrayList hvor det endelige resultat bliver gemt
 		ArrayList<String> psswrd = new ArrayList<String>();
 		psswrd.addAll(alphaSeq);
 
-		//Små bogstaver udvælges
-		int noOfBetas = 3;
+		int noOfBetas = 2;
 		ArrayList<String> betaSeq = new ArrayList<String>();
-		for(int i=0 ; i<noOfBetas ; i++)
-		{
+		for(int i=0 ; i<noOfBetas ; i++){
 			Random r = new Random();
 			betaSeq.add(beta.get(r.nextInt(beta.size())));
 		}
-		//De små bogstaver tilføjes til passwordet
 		psswrd.addAll(betaSeq);
 
-		//Tal udvælges
 		int noOfNums = 2;
 		ArrayList<String> numSeq = new ArrayList<String>();
-		for(int i=0 ; i<noOfNums ; i++)
-		{
+		for(int i=0 ; i<noOfNums ; i++){
 			Random r = new Random();
 			numSeq.add(num.get(r.nextInt(num.size())));
 		}
-		//Tal tilføjes passwordet
 		psswrd.addAll(numSeq);
-		Collections.shuffle(psswrd); //En metode som roder alle værdierne rundt
+		
+		String spec = ".-_+!?=";
+		ArrayList<String> specSeq = new ArrayList<String>();
+		Random r = new Random();
+		int specRan = r.nextInt(6);
+		specSeq.add(spec.substring(specRan, specRan+1));
+		
+		psswrd.addAll(specSeq);
+		
+		Collections.shuffle(psswrd);
 
-		//ArrayListen bliver lavet til en String
 		StringBuilder sb = new StringBuilder();
-		for(String s : psswrd)
-		{
+		for(String s : psswrd){
 			sb.append(s);
 		}
 
 		password = sb.toString();
 		return password;
 	}
-
 	
 }
