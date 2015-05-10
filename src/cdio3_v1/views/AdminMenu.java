@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.HasAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import cdio3_v1.shared.DALException;
 import cdio3_v1.shared.OperatorDTO;
 import cdio3_v1.views.OperatorMenu;
 import cdio3_v1.client.ClientSideImpl;
@@ -32,38 +33,38 @@ public class AdminMenu extends Composite{
 	
 	public void showOperatorFunctions(OperatorDTO opr)
 	{
-		//om = new OperatorMenu(mc);
-		//vPanel.add(om);
-		
-//		if (opr.getID() != 10)
+
+//		if (opr.getID() == 10)
 //		{
-//	
-//			Anchor create = new Anchor("Opret Operat\u00f8r");
-//			vPanel.add(create);
-//			// call back the controller
-//			create.addClickHandler(new ClickHandler(){
-//				public void onClick(ClickEvent event){				
-//					//	mc.loadCreateView();
-//				}
-//			});
-//	
-//			// use unicode escape sequence \u00F8 for '�'
-//			Anchor read = new Anchor("List Operat\u00f8rer");
-//			vPanel.add(read);
-//			read.addClickHandler(new ClickHandler(){
-//				public void onClick(ClickEvent event){				
-//					//mc.loadReadView();
-//				}
-//			});
-//	
-//			Anchor delete = new Anchor("Slet Operat\u00f8rer");
-//			vPanel.add(delete);
-//			delete.addClickHandler(new ClickHandler(){
-//				public void onClick(ClickEvent event){				
-//					//mc.loadDeleteView();
-//				}
-//			});
-//			
+	
+			Anchor create = new Anchor("Opret Operat\u00f8r");
+			vPanel.add(create);
+			// call back the controller
+			create.addClickHandler(new ClickHandler(){
+				public void onClick(ClickEvent event){				
+				//mc.loadCreateView();
+				}
+			});
+	
+			// use unicode escape sequence \u00F8 for '�'
+			Anchor read = new Anchor("List Operat\u00f8rer");
+			vPanel.add(read);
+			read.addClickHandler(new ClickHandler(){
+				public void onClick(ClickEvent event){				
+					try {
+						mc.mainView.show(new ReadView(clientImpl));
+					} catch (DALException e) {}
+				}
+			});
+	
+			Anchor delete = new Anchor("Slet Operat\u00f8rer");
+			vPanel.add(delete);
+			delete.addClickHandler(new ClickHandler(){
+				public void onClick(ClickEvent event){				
+					//mc.loadDeleteView();
+				}
+			});
+			
 //		}
 		
 		Anchor update = new Anchor("Opdater Operat\u00f8r");
