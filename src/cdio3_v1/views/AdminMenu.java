@@ -33,16 +33,13 @@ public class AdminMenu extends Composite{
 	
 	public void showOperatorFunctions(OperatorDTO opr)
 	{
-
-//		if (opr.getID() == 10)
-//		{
 	
 			Anchor create = new Anchor("Opret Operat\u00f8r");
 			vPanel.add(create);
 			// call back the controller
 			create.addClickHandler(new ClickHandler(){
 				public void onClick(ClickEvent event){				
-				//mc.loadCreateView();
+					mc.mainView.show(new CreateView(clientImpl));
 				}
 			});
 	
@@ -56,22 +53,13 @@ public class AdminMenu extends Composite{
 					} catch (DALException e) {}
 				}
 			});
-	
-			Anchor delete = new Anchor("Slet Operat\u00f8rer");
-			vPanel.add(delete);
-			delete.addClickHandler(new ClickHandler(){
-				public void onClick(ClickEvent event){				
-					//mc.loadDeleteView();
-				}
-			});
 			
-//		}
 		
-		Anchor update = new Anchor("Opdater Operat\u00f8r");
-		vPanel.add(update);
-		update.addClickHandler(new ClickHandler(){
+			Anchor update = new Anchor("Opdater Operat\u00f8r");
+			vPanel.add(update);
+			update.addClickHandler(new ClickHandler(){
 			public void onClick(ClickEvent event){				
-	//			mc.loadUpdateView();
+				mc.mainView.show(new UpdateView(clientImpl));
 			}
 		});
 	}
