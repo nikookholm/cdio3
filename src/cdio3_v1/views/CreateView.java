@@ -98,13 +98,16 @@ public class CreateView extends Composite {
 		createPanel.add(passwordBox);
 		createPanel.add(cprLabel);
 		createPanel.add(cprBox);
+		
+		
 
 		createPanel.add(okBtn);
 
 
 		// use unicode escape sequence \u00F8 for '�'
 		okBtn = new Button("Tilf\u00F8j");
-		okBtn.setEnabled(false);
+		
+		okBtn.setEnabled(true);
 
 		okBtn.addClickHandler(new ClickHandler() {
 
