@@ -18,7 +18,6 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-
 public class UpdateView extends Composite {
 
 	VerticalPanel updatePanel;
@@ -58,11 +57,10 @@ public class UpdateView extends Composite {
 		t = new FlexTable();
 
 		// adjust column widths
-		t.getFlexCellFormatter().setWidth(0, 0, "50px");
-		t.getFlexCellFormatter().setWidth(0, 1, "200px");
-		t.getFlexCellFormatter().setWidth(0, 2, "50px");
+		t.getFlexCellFormatter().setWidth(0, 0, "200px");
+		t.getFlexCellFormatter().setWidth(0, 1, "50px");
+		t.getFlexCellFormatter().setWidth(0, 2, "200px");
 		t.getFlexCellFormatter().setWidth(0, 3, "200px");
-		t.getFlexCellFormatter().setWidth(0, 4, "200px");
 
 		// style table
 		t.addStyleName("FlexTable");
@@ -70,51 +68,30 @@ public class UpdateView extends Composite {
 
 		// set headers in flextable
 
-		t.setText(0, 0, "Id");
-		t.setText(0, 1, "Navn");
-		t.setText(0, 2, "ini");
-		t.setText(0, 3, "pass");
-		t.setText(0, 4, "cpr");
+		t.setText(0, 0, "Navn");
+		t.setText(0, 1, "ini");
+		t.setText(0, 2, "pass");
+		t.setText(0, 3, "cpr");
 
-		// V.1 fetch persons from data layer
-		// personer = iPersonDAO.getPersons();
+		try {
+			clientImpl.service.read(new AsyncCallback<List<OperatorDTO>>() {
+				
+				@Override
+				public void onSuccess(List<OperatorDTO> liste) {
+					for (int rowIndex=0; rowIndex < liste.size(); rowIndex++) {
+						t.setText(rowIndex+1, 0, "" + liste.get(rowIndex).getName());
+						t.setText(rowIndex+1, 1, liste.get(rowIndex).getIni());
+						t.setText(rowIndex+1, 2, "" + liste.get(rowIndex).getPassword());
+						t.setText(rowIndex+1, 3, "" + liste.get(rowIndex).getCpr());
+						
+						
+						Anchor update = new Anchor("edit");
+						t.setWidget(rowIndex+1, 4, update);
 
-		// V.1 populate table and add edit anchor to each row
-		//		for (int rowIndex=0; rowIndex < personer.size(); rowIndex++) {
-		//			t.setText(rowIndex+1, 0, personer.get(rowIndex).getNavn());
-		//			t.setText(rowIndex+1, 1, "" + personer.get(rowIndex).getAlder());
-		//			Anchor edit = new Anchor("edit");
-		//			t.setWidget(rowIndex+1, 2, edit);
-		//
-		//			edit.addClickHandler(new EditHandler());
-		//		}
-
-
-		// V.2
-		clientImpl.service.getPersons(new AsyncCallback<List<OperatorDTO>>() {
-
-			@Override
-			public void onFailure(Throwable caught) {
-				Window.alert("Server fejl!" + caught.getMessage());
-			}
-
-			@Override
-			public void onSuccess(List<OperatorDTO> result) {
-				// populate table and add delete anchor to each row
-				for (int i=0; i < result.size(); i++) {
-					t.setText(i+1, 0, "" + result.get(i).getID());
-					t.setText(i+1, 1, result.get(i).getName());
-					t.setText(i+1, 2, "" + result.get(i).getIni());
-					t.setText(i+1, 3, "" + result.get(i).getPassword());
-					t.setText(i+1, 4, "" + result.get(i).getCpr());
-					Anchor edit = new Anchor("edit");
-					t.setWidget(i+1, 3, edit);
-
-					edit.addClickHandler(new EditHandler());
+						update.addClickHandler(new UpdateHandler());
+					}
+					
 				}
-
-			}
-
 		});
 
 		updatePanel.add(t);
@@ -126,7 +103,7 @@ public class UpdateView extends Composite {
 		cprBox = new TextBox();
 	}
 
-	private class updateHandler implements ClickHandler {
+	private class UpdateHandler implements ClickHandler {
 		public void onClick(ClickEvent event) {
 
 			// if previous edit open - force cancel operation�
@@ -137,17 +114,17 @@ public class UpdateView extends Composite {
 			eventRowIndex = t.getCellForEvent(event).getRowIndex();
 
 			// populate textboxes
-			nameBox.setText(t.getText(eventRowIndex, 1));
-			iniBox.setText(t.getText(eventRowIndex, 2));
-			passwordBox.setText(t.getText(eventRowIndex, 3));
-			cprBox.setText(t.getText(eventRowIndex, 4));
+			nameBox.setText(t.getText(eventRowIndex, 0));
+			iniBox.setText(t.getText(eventRowIndex, 1));
+			passwordBox.setText(t.getText(eventRowIndex, 2));
+			cprBox.setText(t.getText(eventRowIndex, 3));
 
 
 			// show text boxes for editing
-			t.setWidget(eventRowIndex, 1, nameBox);
-			t.setWidget(eventRowIndex, 2, iniBox);
-			t.setWidget(eventRowIndex, 3, passwordBox);
-			t.setWidget(eventRowIndex, 4, cprBox);
+			t.setWidget(eventRowIndex, 0, nameBox);
+			t.setWidget(eventRowIndex, 1, iniBox);
+			t.setWidget(eventRowIndex, 2, passwordBox);
+			t.setWidget(eventRowIndex, 3, cprBox);
 
 			// start editing here
 			nameBox.setFocus(true);

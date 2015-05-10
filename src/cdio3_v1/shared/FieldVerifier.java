@@ -38,6 +38,7 @@ public class FieldVerifier {
 		return ((name.length() > 1) && (name.length() < 21));
 		
 	}
+	
 	public static boolean isIdValid(String oprId) throws DALException {
 		if(oprId.length() == 0){
 			return false;
@@ -53,7 +54,6 @@ public class FieldVerifier {
 	public static boolean isNewIdValid(int oprId) throws DALException
 	{
 		return ((oprId > 0) && (oprId < 100000000));	
-	
 	}
 	
 	public static boolean isIniValid(String ini) throws DALException
@@ -97,6 +97,7 @@ public class FieldVerifier {
 				int smalls = 0;
 				int bigs = 0;
 				int nos = 0;
+				int cha = 0;
 				for(int i=0 ; i<password.length() ; i++)
 				{
 					if(password.charAt(i)>='A' && password.charAt(i)<='Z'){
@@ -108,9 +109,12 @@ public class FieldVerifier {
 					if(password.charAt(i)>='0' && password.charAt(i)<='9'){
 						nos ++;
 					}
+					if(password.charAt(i)>='.' && password.charAt(i)<='='){
+						cha ++;
+					}
 				}
 
-				if((bigs>=1) && (smalls>=1) && (nos>=1))
+				if((bigs>=1) && (smalls>=1) && (nos>=1) && (cha>=1))
 				{
 					passwordOK = true;
 				}
