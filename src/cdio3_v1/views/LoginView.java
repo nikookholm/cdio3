@@ -3,14 +3,18 @@ package cdio3_v1.views;
 import cdio3_v1.client.ClientSideImpl;
 import cdio3_v1.client.Main;
 import cdio3_v1.client.controller.MainController;
+import cdio3_v1.client.*;
+import cdio3_v1.server.IOperatorDAO;
 import cdio3_v1.shared.DALException;
 import cdio3_v1.shared.FieldVerifier;
+import cdio3_v1.shared.OperatorDTO;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -125,9 +129,23 @@ public class LoginView extends Composite {
 				//Herefter skal der komme en menu, altefter om det er en admin eller en operatør der er logget ind
 				//Admin skal kunne bruge vægten samt have adgang til CRUD funktionerne.
 				String loginData = userBox.getText() + "," + passwordBox.getText();
-			
 				
-				mc.mainView.show(new AdminMenu(mc));
+				OperatorDTO opr;
+				
+				clientImpl.service.login(loginData, new AsyncCallback<Boolean>()) {
+					
+					public void onSuccess(Boolean result) {
+						mc.mainView.show(new AdminMenu(mc));
+						mc.LoggedInOperator = clientImpl.service.get
+					}
+					
+					public void onFailure(Throwable caught) {
+						Window.alert("Du loggede desværre ikke ind - prøv igen");
+						
+						
+					}
+				});
+				
 				
 				
 				
