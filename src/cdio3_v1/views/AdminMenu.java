@@ -33,7 +33,6 @@ public class AdminMenu extends Composite{
 	
 	public void showOperatorFunctions(OperatorDTO opr)
 	{
-	
 			Anchor create = new Anchor("Opret Operat\u00f8r");
 			vPanel.add(create);
 			// call back the controller
@@ -54,7 +53,6 @@ public class AdminMenu extends Composite{
 				}
 			});
 			
-		
 			Anchor update = new Anchor("Opdater Operat\u00f8r");
 			vPanel.add(update);
 			update.addClickHandler(new ClickHandler(){
