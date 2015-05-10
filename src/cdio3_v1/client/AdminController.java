@@ -1,5 +1,6 @@
 package cdio3_v1.client;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cdio3_v1.server.WeightFunctions;
@@ -22,8 +23,9 @@ public interface AdminController extends RemoteService {
 		public void create(OperatorDTO oDTO)throws Exception;
 		public void update(OperatorDTO oDTO)throws Exception;
 		public void delete(int id)throws Exception;
-		public List<OperatorDTO> read()throws Exception;
+		public ArrayList<OperatorDTO> read()throws Exception;
 		public boolean login(String login)throws Exception;
+		public void getOperator(OperatorDTO oDTO) throws Exception;
 		
 	
 

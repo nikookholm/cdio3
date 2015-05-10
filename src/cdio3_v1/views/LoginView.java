@@ -132,20 +132,20 @@ public class LoginView extends Composite {
 				
 				OperatorDTO opr;
 				
-				clientImpl.service.login(loginData, new AsyncCallback<Boolean>()) {
+//					clientImpl.service.login(loginData, new AsyncCallback<Boolean>()) {
 					
-					public void onSuccess(Boolean result) {
-						mc.mainView.show(new AdminMenu(mc));
-						mc.LoggedInOperator = clientImpl.service.get
-					}
+//					public void onSuccess(Boolean result) {
+//						mc.mainView.show(new AdminMenu(mc));
+//						mc.LoggedInOperator = clientImpl.service.get
+//					}
 					
-					public void onFailure(Throwable caught) {
-						Window.alert("Du loggede desværre ikke ind - prøv igen");
-						
-						
-					}
-				});
-				
+//					public void onFailure(Throwable caught) {
+//						Window.alert("Du loggede desværre ikke ind - prøv igen");
+//						
+//						
+//					}
+//				});
+//				
 				
 				
 				
