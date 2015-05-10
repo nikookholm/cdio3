@@ -128,7 +128,6 @@ public class LoginView extends Composite {
 			
 				
 				mc.mainView.show(new AdminMenu(mc));
-				//mc.mainView.show(new Label("dgd"));
 				
 				
 				

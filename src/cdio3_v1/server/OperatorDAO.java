@@ -61,7 +61,7 @@ public class OperatorDAO extends RemoteServiceServlet implements IOperatorDAO {
 		System.out.println("Tilføjer operator");
 		Connector.doUpdate(
 				"INSERT INTO operatoer(opr_id, opr_navn, ini, cpr, password) VALUES " + 
-				"(" + opr.getID() + ", '" + opr.getName() + "', '" + opr.getIni() + "', '" + 
+				"(" + opr.getID()+1 + ", '" + opr.getName() + "', '" + opr.getIni() + "', '" + 
 				opr.getCpr() + "', '" + newPassword + "')"
 			);
 		}
